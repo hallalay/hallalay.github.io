@@ -1,0 +1,61 @@
+#directions-panel {
+    float: right;
+    width: 100%;
+    font: var(--destinations-font-family);
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.route-card {
+    font: var(--destinations-font-family);
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background-color: var(--main-bg-color4);
+    color: var(--main-bg-color1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.route-card:hover {
+    background-color: var(--main-bg-color3);
+}
+.distance {
+    text-align: center;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.distance h3 {
+    margin: 0;
+}
+
+.route-card button {
+    color: var(--main-bg-color4);
+    width: 12%;
+    background-color: var(--main-bg-color2);
+    border-radius: 4px;
+    border: none;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.route-card button:hover {
+    transform: translateY(-1px);
+    transition: transform 0.1s ease-in-out;
+}
+
+.route-card button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}

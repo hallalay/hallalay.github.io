@@ -1,0 +1,27 @@
+header {
+    /* background-color: linear-gradient(to bottom right, var(--main-bg-color1), var(--main-bg-color2)); */
+    background-color: var(--main-bg-color1);
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+display: inline;
+margin: 20px;
+
+}
+
+nav ul li a {
+text-decoration: none;
+color: #fff;
+font-weight: bold;
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Webflow" name="generator">
+
+    <title>Bon VoyAIge</title>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="css/webflow.css">
+    <link rel="stylesheet" href="css/bon-voyai.webflow.css">
+
+
+    <link rel="stylesheet" href="css/inputs.css">
+    <link rel="stylesheet" href="css/chosenDestinations.css">
+    <link rel="stylesheet" href="css/recommendedDestinations.css">
+
+    <!-- Options -->
+    <link rel="stylesheet" href="css/slides.css">
+    <link rel="stylesheet" href="css/moreOptions.css">
+
+    <!-- Searchbar -->
+    <link rel="stylesheet" href="css/searchbar.css">
+
+    
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/routeCards.css">
+
+    <link rel="stylesheet" href="css/examples.css">
+
+    <link rel="stylesheet" href="css/Header.css">
+    <link rel="stylesheet" href="css/defaultVariables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/Map.css">
+
+
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+</head>
+<body>
+
+
+    <div class="navigation wf-section"></div>
+  <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease-out" data-easing2="ease-out" role="banner" class="navigation w-nav">
+    <div class="navigation-container">
+      <a href="index.html" aria-current="page" class="logo w-inline-block w--current"><img src="images/logo-spoon-white.svg" alt=""></a>
+      <nav role="navigation" class="nav-menu w-nav-menu">
+        <a href="features.html" class="nav-link w-nav-link">Features</a>
+        <a href="about.html" class="nav-link w-nav-link">About</a>
+        <a href="./log-in.html" class="nav-link w-nav-link">Sign in</a>
+        <a href="./trip_planner.html" class="navigation-button w-button">Plan Your Trip</a>
+      </nav>
+      <div class="menu-button w-nav-button">
+        <div class="icon-2 w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-inner cc-header-extra wf-section">
+    <div class="container">
+      <div class="header-inner-content" data-aos="fade-up" data-aos-duration="1000">
+        <div class="inner-category">
+          <a href="#" class="h3 cc-header">Plan Your Trip</a>
+          <div class="cta-line cc-header"></div>
+        </div>
+        <h1 class="h1" data-aos="flip-up" data-aos-duration="1000">Design Your Dream Journey</h1>
+        <p class="paragraph" data-aos="flip-up" data-aos-duration="1000">Looking for an unforgettable adventure? Look no further! Share with us your dream trip and we'll tailor a once-in-a-lifetime experience that you'll never forget. Let our AI curate the perfect itinerary for you, filled with exclusive activities and hidden gems that will leave you breathless. Don't settle for an ordinary vacation, let us make your travel dreams a reality!</p>
+      </div>
+    </div>
+  </div>
+  <div class="header-banner wf-section" data-aos="fade-up" data-aos-duration="1000">
+    <div class="premium-image-banner"><img src="images/GettyImages-1045586638.webp" srcset="images/GettyImages-1045586638-p-500.webp 500w, images/GettyImages-1045586638-p-1080.webp 1080w, images/GettyImages-1045586638-p-1600.webp 1600w, images/GettyImages-1045586638.webp 1920w" sizes="(max-width: 479px) 87vw, (max-width: 767px) 92vw, 94vw" alt=""></div>
+  </div>
+        <main>
+            
+            <!-- <section id="content"> full container is div--> 
+            <section class="full_container" id="full_container"> 
+                <div class="bot_container" data-aos="fade-up-right" data-aos-duration="1000">
+
+                    <h1>information?</h1>
+
+                    <div class="search-bar">
+                        <input type="text" id="originInput" class="controls" placeholder="Origin" value="stockholm">
+                        <!-- <input type="text" id="originInput" placeholder="Origin City" onchange="initMap()"> -->
+                        <input type="date" id="arrivalDateInput" placeholder="Arrival Date" value="2023-07-17">
+                        <input type="date" id="departureDateInput" placeholder="Departure Date" value="2023-07-24">
+                        <input type="number" id="peopleInput" placeholder="Adults" value="1">          
+                    </div>
+                    
+                    <div class="slide-container-questions">
+                        <p>choose your preferences</p>
+                    </div>
+                    <div class="summary-container"></div>
+                    <script src="js/sliding_windows.js"></script>
+
+                    <button id='moreOptions' class="moreOptions" onclick="toggleMoreOptions()">MORE</span></button>
+                    <div id="moreOptions-container" style="display: none;"></div>
+                    <script src="js/moreOptions.js"></script>
+
+
+                    <p>Tell me, as detailed as you can, what you want to see and do on your trip. You can click on the examples below for some inspiration</p>
+                    <textarea id="prompt-input"> hej</textarea>
+                    <button id="generate-btn" onclick="bot.handleGenerateButtonClick()">Generate</button>
+                    <p id="wtabout"></p>
+                    <div id="response-output"></div>
+                    <button id="more-btn" onclick="bot.handleMoreButtonClick()">More</button>
+                    
+                    <script src="js/obj.js?v=2"></script>
+                </div>
+
+                <div class="info_container" data-aos="fade-up-left" data-aos-duration="1000">
+                        <h1>Your itinerary!</h1>
+                        <p>Lös det här nu</p>
+                        <!-- <div id="itinerary"></div> -->
+                        
+                        <div id="map"></div>
+                        <div id="directions-panel">
+                            <!-- <script src="./js/trainTimes.js"></script> -->
+                        </div>
+
+                        <button id='view-trip' onclick="redirectToPage2()">View Trip</button>
+
+                        <script>
+                        function redirectToPage2() {
+                            // let destinations = document.querySelectorAll('.route-card')
+                            // let destinationData = []
+
+                            // for
+                            
+                            window.location.href = './testing/view_trip.html';
+                        }
+                        </script>
+
+                        <script src="js/travelPlan.js" defer></script>
+                        <script src="js/viewTrip.js"></script>
+                        
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdzE4WLn9C1XS-_yq5far3ntFWQlldOd0&callback=initMap&libraries=places&v=weekly" defer></script>
+
+                </div>
+            </section>
+            <!-- </section> -->
+
+            <section class="example-container" id="example-container" data-aos="fade-up" data-aos-duration="1000">
+                <script src="js/examples.js"></script>
+            </section>
+
+
+            <section id="contact">
+                <h1>Contact Us</h1>
+                <p>123 Main Street, City, Country</p>
+                <p>Email: herman.hallonqvist@gmail.com</p>
+            </section>
+
+
+        </main>
+
+
+
+    <footer>
+        <p>&copy; 2023 Your Company. All rights reserved.</p>
+    </footer>
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
+</body>
+</html>
+

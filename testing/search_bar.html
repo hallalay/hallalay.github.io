@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Station Search</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        .search-results {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            z-index: 1;
+        }
+
+        .search-results ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .search-results li {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .search-results li:hover {
+            background-color: #f4f4f4;
+        }
+
+        .search-results li.selected {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div style="position: relative;">
+        <input type="text" id="search" placeholder="Search for a train station..." autocomplete="off">
+        <div class="search-results">
+            <ul id="results"></ul>
+        </div>
+    </div>
+
+    <script>
+        let stations = [];
+        let selectedIndex = -1;
+
+        // Load and parse the CSV
+        Papa.parse('./valid_uics.csv', {
+            download: true,
+            header: false,
+            delimiter: ';',
+            dynamicTyping: true,
+            complete: function(results) {
+                stations = results.data;
+
+                // Event listener for the search box
+                // Event listener for the search box
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    let matches = stations.filter(station => {
+        if (!station[0]) return false;
+        const words = station[0].toLowerCase().split(' ');
+        return words.some(word => word.startsWith(query));
+    });
+
+    // Sort the matches to prioritize stations starting with the query
+    matches.sort((a, b) => {
+        const aStartsWithQuery = a[0].toLowerCase().startsWith(query);
+        const bStartsWithQuery = b[0].toLowerCase().startsWith(query);
+
+        if (aStartsWithQuery && !bStartsWithQuery) {
+            return -1;
+        } else if (!aStartsWithQuery && bStartsWithQuery) {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+
+    displayResults(matches.slice(0, 5));
+});
+
+
+                searchInput.addEventListener('keydown', function(event) {
+                    const results = document.getElementById('results');
+                    if (event.key === 'ArrowUp') {
+                        event.preventDefault();
+                        navigateResults(-1);
+                    } else if (event.key === 'ArrowDown') {
+                        event.preventDefault();
+                        navigateResults(1);
+                    } else if (event.key === 'Enter') {
+                        event.preventDefault();
+                        selectResult();
+                    }
+                });
+            }
+        });
+
+        // Display the results
+        function displayResults(matches) {
+            const resultsEl = document.getElementById('results');
+            resultsEl.innerHTML = '';
+
+            if (matches.length === 0) {
+                document.querySelector('.search-results').style.display = 'none';
+                return;
+            }
+
+            selectedIndex = -1;
+
+            matches.forEach((match, index) => {
+                const li = document.createElement('li');
+                li.textContent = match[0];
+                li.addEventListener('click', () => {
+                    document.getElementById('search').value = match[0];
+                    document.querySelector('.search-results').style.display = 'none';
+                });
+                resultsEl.appendChild(li);
+            });
+
+            highlightResult(selectedIndex);
+            document.querySelector('.search-results').style.display = 'block';
+        }
+
+        // Highlight the selected result
+        function highlightResult(index) {
+            const results = document.getElementById('results');
+            const resultItems = results.getElementsByTagName('li');
+
+            for (let i = 0; i < resultItems.length; i++) {
+                if (i === index) {
+                    resultItems[i].classList.add('selected');
+                } else {
+                    resultItems[i].classList.remove('selected');
+                }
+            }
+        }
+
+        // Navigate through the results using arrow keys
+        function navigateResults(direction) {
+            const results = document.getElementById('results');
+            const resultItems = results.getElementsByTagName('li');
+            const numResults = resultItems.length;
+
+            if (numResults === 0) return;
+
+            selectedIndex = (selectedIndex + direction + numResults) % numResults;
+            highlightResult(selectedIndex);
+            document.getElementById('search').value = resultItems[selectedIndex].textContent;
+        }
+
+        // Select the result when pressing Enter
+        function selectResult() {
+            const results = document.getElementById('results');
+            const resultItems = results.getElementsByTagName('li');
+
+            if (resultItems.length === 0 || selectedIndex === -1) return;
+
+            const selectedResult = resultItems[selectedIndex];
+            const selectedText = selectedResult.textContent;
+            document.getElementById('search').value = selectedText;
+            document.querySelector('.search-results').style.display = 'none';
+        }
+
+        // Close the results if clicked outside
+        document.addEventListener('click', function(event) {
+            const searchResults = document.querySelector('.search-results');
+            if (event.target !== searchResults && !searchResults.contains(event.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

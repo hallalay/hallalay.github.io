@@ -1,0 +1,84 @@
+    /* Style the generate button */
+    #generate-btn {
+        display: block;
+        margin: 1rem auto;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        background-color: #007bff;
+        background-image: linear-gradient(90deg, var(--main-bg-color1), var(--main-bg-color2));
+        color: var(--main-bg-color4);
+        border: none;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+        margin-bottom: 60px;
+        /* transition: transform 0.1s ease-in-out; */
+
+    }
+
+    #generate-btn:hover {
+        transform: translateY(-2px);
+        background-image: linear-gradient(90deg, var(--main-bg-color1), var(--main-bg-color2));
+        transition: transform 0.1s ease-in-out;
+
+    }
+
+    #generate-btn:active {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+
+    /* Style the more button */
+    #more-btn {
+        display: none;
+        /* display: block; */
+        margin: 1rem auto 1rem;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.8rem;
+        background-image: linear-gradient(90deg, var(--main-bg-color1), var(--main-bg-color2));
+        color: var(--main-bg-color4);
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Hover effect for the more button */
+    #more-btn:hover {
+        transform: translateY(-2px);
+        background-image: linear-gradient(90deg, var(--main-bg-color1), var(--main-bg-color2));
+        transition: transform 0.1s ease-in-out;
+    }
+
+    #more-btn:active {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+
+    #view-trip {
+        font: var(--destinations-font-family);
+        font-weight: bold;
+        display: block;
+        margin: 1rem auto 1rem;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.8rem;
+        background-image: linear-gradient(90deg, var(--main-bg-color3), var(--main-bg-color4));
+        color: var(--main-bg-color1);
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+      }
+
+    #view-trip:hover {
+        transform: translateY(-2px);
+        background-image: linear-gradient(90deg, var(--main-bg-color3), var(--main-bg-color4));
+        transition: transform 0.1s ease-in-out;
+    }
+
+    #view-trip:active {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+

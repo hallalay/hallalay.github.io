@@ -1,0 +1,40 @@
+.full_container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    font-family: var(--destinations-font-family);
+    /* width: 200%; */
+    }
+
+    .bot_container {
+        width: 100%;
+        padding: 2vw;
+        margin-right: 1vw;
+        color: var(--main-bg-color1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--main-bg-color3);
+        }
+
+    /*recommended*/
+
+    textarea{
+        display: block;
+        margin: 0 auto;
+        padding: 0.5rem;  
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        /* max-width: 80%; */
+        width: 100%;
+        box-sizing: border-box;
+        background-color: var(--main-bg-color5);
+        resize: none;
+        height: 20vh;
+
+        }
+
+
+ 
