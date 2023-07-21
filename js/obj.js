@@ -1,7 +1,7 @@
 class Bot {
     constructor() {
         this.API_URL = 'https://api.openai.com/v1/completions';
-        this.API_KEY = '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';  
+        this.API_KEY = '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';  
         this.MODEL = 'text-davinci-003';
         this.USERINPUT = '';
 
