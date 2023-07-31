@@ -1,6 +1,6 @@
-class Bot {
-    constructor(prompt) {
-        this.API_URL = 'https://api.openai.com/v1/chat/completions';
+class Bot2 {
+    constructor(cities) {
+        this.API_URL = 'https://api.openai.com/v1/completions';
         this.API_KEY = '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';  
         this.MODEL = 'text-davinci-003';
         this.USERINPUT = '';
@@ -11,9 +11,9 @@ class Bot {
         this.updatePrompt()
 
 		this.recommendedDests = [];
-        this.recommendedCitys = [];
+        this.recommendedCities = [];
         this.chosenDests = [];
-        this.chosenCitys = [];
+        this.chosenCities = cities;
 
         // Get references to HTML elements
 		this.wtabout = document.getElementById('wtabout');
@@ -23,15 +23,16 @@ class Bot {
     }
 
     updatePrompt() {
-        this.prompt = `you are a professional travel advisor and should give a personalized itinerary in Europe based on the provided information. Answer in a numbered list like this: 1. city, country - detailed motivation based on the information, maximum 40 words. The trip should only include 5 destinations in Europe. ${this.NOT}\\n
-                    \\nRemember that not every destination needs to fulfill every criterion, but the overall trip should collectively meet these expectations.\\n
-                    \\nDeparture and Return dates: Departure: ${document.getElementById('arrivalDateInput')}, Return: ${document.getElementById('departureDateInput')}\\n
-                    \\nOrigin: ${document.getElementById('originInput')}\\n
-                    \\nPreferences:\\n
-                    ${this.preferences} 
-                    \\nMy travel expectations:\\n
-                    ${this.USERINPUT}\\n
-                    \\nThink through your choices and try to suit  them perfectly for this information\\n`;
+        this.messages = [
+            {
+                "role" : "system",
+                "content" : "You are a travel agent specializing in train travel. You help clients plan their trips based on their preferences."
+            },
+            {
+                "role" : "user",
+                "content" : `Your client is travelling to ${this.chosenCities}`
+            }
+        ]
       }
 
     // Extract destination objects from response text
@@ -41,7 +42,7 @@ class Bot {
         let match;
         while ((match = regex.exec(text)) !== null) {
             const [, city, country, motivation] = match;
-                    this.recommendedCitys.push(city)
+                    this.recommendedCities.push(city)
             const destination = `${city.trim()}, ${country.trim()}`;
             this.recommendedDests.push({ destination, motivation });
         }
@@ -183,7 +184,7 @@ class Bot {
             destinationElement.textContent = destination;
 
             const city = destination.split(',')[0].trim(); // Extract city name
-            this.chosenCitys.push(city); // Push city name into chosenCitys array	
+            this.chosenCities.push(city); // Push city name into chosenCities array	
 
             container.appendChild(destinationElement);
 
@@ -328,7 +329,7 @@ class Bot {
 
         const bDests = this.recommendedDests.concat(this.chosenDests);
 
-        this.NOT = `not ${this.recommendedCitys.concat(this.chosenCitys)}`
+        this.NOT = `not ${this.recommendedCities.concat(this.chosenCities)}`
 
         this.updatePrompt();
 
