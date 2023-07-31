@@ -1,8 +1,15 @@
 class Bot {
+<<<<<<< HEAD
     constructor(prompt) {
         this.API_URL = 'https://api.openai.com/v1/chat/completions';
         this.API_KEY = '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';  
         this.MODEL = 'text-davinci-003';
+=======
+    constructor() {
+        this.API_URL = 'https://api.openai.com/v1/chat/completions';
+        this.API_KEY = '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';  
+        this.MODEL = 'gpt-3.5-turbo';
+>>>>>>> 3c91738abed5b851bc1fd7239b07bbe08cb711e5
         this.USERINPUT = '';
 
         this.preferences = ''; // updates through sliding windows
@@ -261,13 +268,19 @@ class Bot {
     async callGpt(prompt) {
             const requestBody = {
                     model: this.MODEL,
-                    prompt: prompt,
+                    messages: [
+                        {"role": "system", "content": "You are a lizard"},
+                        {"role": "user", "content": "Tell me a Joke"}
+                    ],
                     temperature: 0.7,
                     max_tokens: 400,
                     top_p: 1,
                     frequency_penalty: 0,
                     presence_penalty: 0,
+                    // prompt: prompt
             };
+
+            console.log(JSON.stringify(requestBody))
 
             const response = await fetch(this.API_URL, {
                     method: 'POST',
@@ -278,6 +291,7 @@ class Bot {
                     body: JSON.stringify(requestBody),
             });
             const { choices } = await response.json();
+            console.log('choices', choices)
             const [{ text }] = choices;
             return text;
     }
@@ -307,11 +321,10 @@ class Bot {
 		try {
             this.updatePrompt();
 
-			// const text = await this.callGpt(this.prompt);
-            // console.log(text)
+			const text = await this.callGpt(this.prompt);
+            console.log('answer: ', text)
 
-			const text = `1. Barcelona, Spain - Barcelona is an amazing city with a unique culture and fascinating architecture. It is also home to many beautiful beaches and a vibrant nightlife.\n\n2. London, UK - London is a global city with world-class attractions, beautiful parks and gardens, and a lively cultural scene.\n\n3. Paris, France - Rio de Janeiro is a vibrant city with stunning beaches and an exciting culture. It is also home to the iconic Christ the Redeemer statue.\n\n4. Prague, Czech - New York City is a bustling and exciting city with plenty to see and do. It is also home to some of the world's most iconic landmarks.\n\n5. Berlin, Germany - Bangkok is a bustling and vibrant city with an amazing array of culture, cuisine, and attractions. It is also home to some of the most stunning temples in the world.`
-// 
+			// const text = `1. Barcelona, Spain - Barcelona is an amazing city with a unique culture and fascinating architecture. It is also home to many beautiful beaches and a vibrant nightlife.\n\n2. London, UK - London is a global city with world-class attractions, beautiful parks and gardens, and a lively cultural scene.\n\n3. Paris, France - Rio de Janeiro is a vibrant city with stunning beaches and an exciting culture. It is also home to the iconic Christ the Redeemer statue.\n\n4. Prague, Czech - New York City is a bustling and exciting city with plenty to see and do. It is also home to some of the world's most iconic landmarks.\n\n5. Berlin, Germany - Bangkok is a bustling and vibrant city with an amazing array of culture, cuisine, and attractions. It is also home to some of the most stunning temples in the world.`
 
 			this.recommendedDests = this.extractDestinations(text);
 			this.displayDestinations(this.recommendedDests);
