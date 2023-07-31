@@ -1,8 +1,9 @@
 .full_container {
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
+    flex-direction: column;
     font-family: var(--destinations-font-family);
+    padding: 0 10%;
     /* width: 200%; */
     }
 

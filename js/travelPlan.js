@@ -203,7 +203,7 @@ class Map {
       fullTrip: this.fullTrip,
       origin: document.getElementById("originInput").value,
       arrivalDate: document.getElementById("arrivalDateInput").value,
-      departureDate: document.getElementById("departureDateInput").value,
+      // departureDate: document.getElementById("departureDateInput").value,
     }
     localStorage.setItem("tripSummary", JSON.stringify(tripSummary));
 

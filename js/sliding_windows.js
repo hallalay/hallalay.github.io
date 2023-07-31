@@ -58,7 +58,7 @@ const categories = [
         'Mildly Unique - Somewhat Off the Beaten Path, Yet Tourist-friendly',
         'Moderately Unique - Emerging Gems with Growing Tourism Appeal',
         'Highly Unique - Exclusive and Unspoiled Destinations with Limited Access',
-        // 'Extraordinarily Unique - Legendary and Coveted Bucket List Destinations'
+        'Extraordinarily Unique - Legendary and Coveted Bucket List Destinations'
       ]
       }
   ];
