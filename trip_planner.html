@@ -83,18 +83,31 @@
                     <h1>information?</h1>
 
                     <div class="search-bar">
-                        <input type="text" id="originInput" class="controls" placeholder="Origin" value="stockholm">
-                        <!-- <input type="text" id="originInput" placeholder="Origin City" onchange="initMap()"> -->
-                        <input type="date" id="arrivalDateInput" placeholder="Arrival Date" value="2023-07-17">
-                        <input type="date" id="departureDateInput" placeholder="Departure Date" value="2023-07-24">
-                        <input type="number" id="peopleInput" placeholder="Adults" value="1">          
-                    </div>
+                      <div class="search-input-container">
+                        <label for="origin">Where from?</label>
+                        <input class="search-input" type="text" id="originInput" placeholder="Origin" value="stockholm">
+                      </div>
+                      <div class="search-input-container">
+                        <label for="arrivalDateInput">When?</label>
+                        <input class="search-input" type="date" id="arrivalDateInput" placeholder="Arrival Date" value="2023-07-17">
+                      </div>
+                      <!-- <div class="search-input-container"> -->
+                        <!-- <label for="travel-style">Duration</label> -->
+                        <!-- <input class="search-input" type="number" id="duration" placeholder="duration" value="1"> -->
+                      <!-- </div> -->
+                      <div class="search-input-container">
+                        <label for="travel-style">Travel Style</label>
+                        <select name="travel-style" class="search-input">
+                          <option value="Adventure">Adventure and outdoor activities</option>
+                          <option value="Relaxation">Relaxation and spa retreats</option>
+                          <option value="Cultural">Cultural and historical exploration</option>
+                          <option value="Food">Food and culinary experiences</option>
+                        </select>
+                      </div>
+                      </div>
                     
-                    <div class="slide-container-questions">
-                        <p>choose your preferences</p>
-                    </div>
-                    <div class="summary-container"></div>
-                    <script src="js/sliding_windows.js"></script>
+                    <!-- <div class="slide-container-questions">
+                    </div> -->
 
                     <button id='moreOptions' class="moreOptions" onclick="toggleMoreOptions()">MORE</span></button>
                     <div id="moreOptions-container" style="display: none;"></div>
@@ -102,7 +115,7 @@
 
 
                     <p>Tell me, as detailed as you can, what you want to see and do on your trip. You can click on the examples below for some inspiration</p>
-                    <textarea id="prompt-input"> hej</textarea>
+                    <textarea id="prompt-input" placeholder="Additional information?">hej</textarea>
                     <button id="generate-btn" onclick="bot.handleGenerateButtonClick()">Generate</button>
                     <p id="wtabout"></p>
                     <div id="response-output"></div>
