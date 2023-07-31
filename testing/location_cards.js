@@ -93,6 +93,10 @@ $(document).ready(function() {
     };
 
     window.updateDates();
+
+
+    // Function to get train details and suggestions
+    
 });
 
 
