@@ -2,6 +2,8 @@ var data = localStorage.getItem("tripSummary");
 var tripSummary = JSON.parse(data);
 console.log(tripSummary);
 
+console.log('hejsans')
+
 let colors = ['#ff8014', '#20b37b', '#86bae0']
 
 $(document).ready(function() {
