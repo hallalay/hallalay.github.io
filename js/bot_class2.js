@@ -1,15 +1,8 @@
-class Bot {
-<<<<<<< HEAD
-    constructor(prompt) {
-        this.API_URL = 'https://api.openai.com/v1/chat/completions';
+class Bot2 {
+    constructor(cities) {
+        this.API_URL = 'https://api.openai.com/v1/completions';
         this.API_KEY = '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';  
         this.MODEL = 'text-davinci-003';
-=======
-    constructor() {
-        this.API_URL = 'https://api.openai.com/v1/chat/completions';
-        this.API_KEY = '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';  
-        this.MODEL = 'gpt-3.5-turbo';
->>>>>>> 3c91738abed5b851bc1fd7239b07bbe08cb711e5
         this.USERINPUT = '';
 
         this.preferences = ''; // updates through sliding windows
@@ -18,9 +11,9 @@ class Bot {
         this.updatePrompt()
 
 		this.recommendedDests = [];
-        this.recommendedCitys = [];
+        this.recommendedCities = [];
         this.chosenDests = [];
-        this.chosenCitys = [];
+        this.chosenCities = cities;
 
         // Get references to HTML elements
 		this.wtabout = document.getElementById('wtabout');
@@ -30,15 +23,16 @@ class Bot {
     }
 
     updatePrompt() {
-        this.prompt = `you are a professional travel advisor and should give a personalized itinerary in Europe based on the provided information. Answer in a numbered list like this: 1. city, country - detailed motivation based on the information, maximum 40 words. The trip should only include 5 destinations in Europe. ${this.NOT}\\n
-                    \\nRemember that not every destination needs to fulfill every criterion, but the overall trip should collectively meet these expectations.\\n
-                    \\nDeparture and Return dates: Departure: ${document.getElementById('arrivalDateInput')}, Return: ${document.getElementById('departureDateInput')}\\n
-                    \\nOrigin: ${document.getElementById('originInput')}\\n
-                    \\nPreferences:\\n
-                    ${this.preferences} 
-                    \\nMy travel expectations:\\n
-                    ${this.USERINPUT}\\n
-                    \\nThink through your choices and try to suit  them perfectly for this information\\n`;
+        this.messages = [
+            {
+                "role" : "system",
+                "content" : "You are a travel agent specializing in train travel. You help clients plan their trips based on their preferences."
+            },
+            {
+                "role" : "user",
+                "content" : `Your client is travelling to ${this.chosenCities}`
+            }
+        ]
       }
 
     // Extract destination objects from response text
@@ -48,7 +42,7 @@ class Bot {
         let match;
         while ((match = regex.exec(text)) !== null) {
             const [, city, country, motivation] = match;
-                    this.recommendedCitys.push(city)
+                    this.recommendedCities.push(city)
             const destination = `${city.trim()}, ${country.trim()}`;
             this.recommendedDests.push({ destination, motivation });
         }
@@ -190,7 +184,7 @@ class Bot {
             destinationElement.textContent = destination;
 
             const city = destination.split(',')[0].trim(); // Extract city name
-            this.chosenCitys.push(city); // Push city name into chosenCitys array	
+            this.chosenCities.push(city); // Push city name into chosenCities array	
 
             container.appendChild(destinationElement);
 
@@ -268,19 +262,13 @@ class Bot {
     async callGpt(prompt) {
             const requestBody = {
                     model: this.MODEL,
-                    messages: [
-                        {"role": "system", "content": "You are a lizard"},
-                        {"role": "user", "content": "Tell me a Joke"}
-                    ],
+                    prompt: prompt,
                     temperature: 0.7,
                     max_tokens: 400,
                     top_p: 1,
                     frequency_penalty: 0,
                     presence_penalty: 0,
-                    // prompt: prompt
             };
-
-            console.log(JSON.stringify(requestBody))
 
             const response = await fetch(this.API_URL, {
                     method: 'POST',
@@ -291,7 +279,6 @@ class Bot {
                     body: JSON.stringify(requestBody),
             });
             const { choices } = await response.json();
-            console.log('choices', choices)
             const [{ text }] = choices;
             return text;
     }
@@ -321,10 +308,11 @@ class Bot {
 		try {
             this.updatePrompt();
 
-			const text = await this.callGpt(this.prompt);
-            console.log('answer: ', text)
+			// const text = await this.callGpt(this.prompt);
+            // console.log(text)
 
-			// const text = `1. Barcelona, Spain - Barcelona is an amazing city with a unique culture and fascinating architecture. It is also home to many beautiful beaches and a vibrant nightlife.\n\n2. London, UK - London is a global city with world-class attractions, beautiful parks and gardens, and a lively cultural scene.\n\n3. Paris, France - Rio de Janeiro is a vibrant city with stunning beaches and an exciting culture. It is also home to the iconic Christ the Redeemer statue.\n\n4. Prague, Czech - New York City is a bustling and exciting city with plenty to see and do. It is also home to some of the world's most iconic landmarks.\n\n5. Berlin, Germany - Bangkok is a bustling and vibrant city with an amazing array of culture, cuisine, and attractions. It is also home to some of the most stunning temples in the world.`
+			const text = `1. Barcelona, Spain - Barcelona is an amazing city with a unique culture and fascinating architecture. It is also home to many beautiful beaches and a vibrant nightlife.\n\n2. London, UK - London is a global city with world-class attractions, beautiful parks and gardens, and a lively cultural scene.\n\n3. Paris, France - Rio de Janeiro is a vibrant city with stunning beaches and an exciting culture. It is also home to the iconic Christ the Redeemer statue.\n\n4. Prague, Czech - New York City is a bustling and exciting city with plenty to see and do. It is also home to some of the world's most iconic landmarks.\n\n5. Berlin, Germany - Bangkok is a bustling and vibrant city with an amazing array of culture, cuisine, and attractions. It is also home to some of the most stunning temples in the world.`
+// 
 
 			this.recommendedDests = this.extractDestinations(text);
 			this.displayDestinations(this.recommendedDests);
@@ -341,7 +329,7 @@ class Bot {
 
         const bDests = this.recommendedDests.concat(this.chosenDests);
 
-        this.NOT = `not ${this.recommendedCitys.concat(this.chosenCitys)}`
+        this.NOT = `not ${this.recommendedCities.concat(this.chosenCities)}`
 
         this.updatePrompt();
 
