@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI API with Proxy Backend</title>
+</head>
+
+<body>
+    <div style="text-align: center; margin-top: 50px;">
+        <h2>OpenAI API Client</h2>
+        
+        <div>
+            <textarea id="prompt" rows="4" cols="50" placeholder="Enter your prompt here"></textarea>
+        </div>
+
+        <button onclick="sendToOpenAI()">Get Response</button>
+
+        <h3>OpenAI Response:</h3>
+        <pre id="response"></pre>
+    </div>
+
+    <script>
+        async function sendToOpenAI() {
+            const promptValue = document.getElementById('prompt').value;
+            
+            try {
+                const response = await fetch('https://bonvoyai-176378383e73.herokuapp.com/openai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ prompt: `you are a professional travel advisor and should give a personalized itinerary in Europe based on the provided information. Answer in a numbered list like this: 1. city, country - detailed motivation based on the information, maximum 40 words. The trip should only include 5 destinations in Europe.\\n
+                    \\nRemember that not every destination needs to fulfill every criterion, but the overall trip should collectively meet these expectations.\\n
+                    \\nPreferences:\\n
+                    Beer 
+                    \\nMy travel expectations:\\n
+                    culture
+                    \\nThink through your choices and try to suit  them perfectly for this information\\n` })
+                });
+
+                const data = await response.json();
+
+                document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('response').textContent = 'Failed to get a response. See console for details.';
+            }
+        }
+    </script>
+</body>
+
+</html>

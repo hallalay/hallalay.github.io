@@ -1,16 +1,11 @@
 class Bot {
-<<<<<<< HEAD
-    constructor(prompt) {
+    constructor() {
         this.API_URL = 'https://api.openai.com/v1/chat/completions';
         this.API_KEY = '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';  
         this.MODEL = 'text-davinci-003';
-=======
-    constructor() {
-        this.API_URL = 'https://api.openai.com/v1/chat/completions';
-        this.API_KEY = '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';  
-        this.MODEL = 'gpt-3.5-turbo';
->>>>>>> 3c91738abed5b851bc1fd7239b07bbe08cb711e5
+
         this.USERINPUT = '';
+        this.HEROKU_URL = 'https://bonvoyai-176378383e73.herokuapp.com/openai'
 
         this.preferences = ''; // updates through sliding windows
         this.NOT = ''; // adds when user clicks more
@@ -32,8 +27,6 @@ class Bot {
     updatePrompt() {
         this.prompt = `you are a professional travel advisor and should give a personalized itinerary in Europe based on the provided information. Answer in a numbered list like this: 1. city, country - detailed motivation based on the information, maximum 40 words. The trip should only include 5 destinations in Europe. ${this.NOT}\\n
                     \\nRemember that not every destination needs to fulfill every criterion, but the overall trip should collectively meet these expectations.\\n
-                    \\nDeparture and Return dates: Departure: ${document.getElementById('arrivalDateInput')}, Return: ${document.getElementById('departureDateInput')}\\n
-                    \\nOrigin: ${document.getElementById('originInput')}\\n
                     \\nPreferences:\\n
                     ${this.preferences} 
                     \\nMy travel expectations:\\n
@@ -266,34 +259,33 @@ class Bot {
     }
 
     async callGpt(prompt) {
+
+
+                // Construct the request body
             const requestBody = {
-                    model: this.MODEL,
-                    messages: [
-                        {"role": "system", "content": "You are a lizard"},
-                        {"role": "user", "content": "Tell me a Joke"}
-                    ],
-                    temperature: 0.7,
-                    max_tokens: 400,
-                    top_p: 1,
-                    frequency_penalty: 0,
-                    presence_penalty: 0,
-                    // prompt: prompt
+                prompt: this.prompt
             };
-
+        
             console.log(JSON.stringify(requestBody))
-
-            const response = await fetch(this.API_URL, {
-                    method: 'POST',
-                    headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${this.API_KEY}`,
-                    },
-                    body: JSON.stringify(requestBody),
+        
+            // Post the request to your Heroku backend
+            const response = await fetch(this.HEROKU_URL, { // assuming this.HEROKU_URL contains the endpoint on your Heroku app
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody),
             });
-            const { choices } = await response.json();
-            console.log('choices', choices)
-            const [{ text }] = choices;
+        
+            // Parse the response
+            const data = await response.json();
+            console.log('Data from server:', data);
+        
+            // Extract the relevant text. You might need to adjust this based on the exact structure of the response from your server
+            const text = data.choices[0].message.content;
+
             return text;
+            
     }
 
     
