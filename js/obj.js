@@ -338,9 +338,9 @@ class Bot {
         this.updatePrompt();
 
         try {
-            // const text = await this.callGpt(this.prompt);
+            const text = await this.callGpt(this.prompt);
 
-            const text =  `1. Tokyo, Japan - Visit the vibrant city life, explore the world-famous cuisine, and enjoy the unique culture and festivals.\n2. Seoul, South Korea - Experience the cutting-edge technology, explore the ancient palaces, and marvel at the modern architecture.`
+            // const text =  `1. Tokyo, Japan - Visit the vibrant city life, explore the world-famous cuisine, and enjoy the unique culture and festivals.\n2. Seoul, South Korea - Experience the cutting-edge technology, explore the ancient palaces, and marvel at the modern architecture.`
 
 
             const newDestinations = this.extractDestinations(text);
