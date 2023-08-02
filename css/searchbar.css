@@ -7,31 +7,81 @@
     margin: 0 auto;
   }
 
-  .search-input-container {
-    display: flex;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: solid 3px rgba(0,0,0,.1);
-    background-color: rgba(0,0,0,.1);
-    > * {
-        padding: 15px;
-        line-height: 32px;
-        border: none;
-    }
+/* Reset default styles for select elements */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+}
 
-    label {
-      margin: 0;
-      font-size: 100%;
-      border-right: none;
-      font-weight: 700;
-      text-transform: uppercase;
-  }
-    
-    select {
-      background-color: #fafafa; 
-      margin: 0;
-      font-size: 100%;
-      border-left: none;
-      color: #777777;
-  }
+/* Reset default styles for input elements */
+input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 2em; */
+}
+
+/* Custom styles for the container */
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  margin: 20px 0;
+  width: 32%;
+  /* height: 70px; */
+}
+
+/* Custom styles for the label */
+.input-container label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background-color: var(--main-bg-color3);
+  padding: 0 5px;
+  font-size: 14px;
+  font-weight: bold;
+
+  margin-right: 10px; /* Add spacing between the label and input */
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Custom styles for the border around the input */
+.input-border {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  flex-grow: 1; /* Allow the input to grow and fill the remaining space */
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: flex; /* Use flexbox to position input and map icon horizontally */
+  align-items: center; /* Align items vertically in the center */
+  width: 32%;
+}
+
+/* Custom styles for the input */
+.search-input {
+  font-size: 16px;
+  padding: 5px 10px; /* Add some padding on the right side to make space for the map icon */
+  background-color: transparent;
+  border: none; /* Remove the border from the input */
+  height: 30px;
 }
