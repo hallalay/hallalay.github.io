@@ -419,9 +419,6 @@
                       </div>
 
                       <script src="js/EuropeRegionSelection.js"></script>
-                    
-                    <!-- <div class="slide-container-questions">
-                    </div> -->
 
                     <button id='moreOptions' class="moreOptions" onclick="toggleMoreOptions()">MORE</span></button>
                     <div id="moreOptions-container" style="display: none;"></div>
@@ -429,13 +426,15 @@
 
 
                     <p>Tell me, as detailed as you can, what you want to see and do on your trip. You can click on the examples below for some inspiration</p>
-                    <textarea id="prompt-input" placeholder="Additional information?">hej</textarea>
-                    <button id="generate-btn" onclick="bot.handleGenerateButtonClick()">Generate</button>
+                    <textarea id="prompt-input" placeholder="Additional information?">whatever</textarea>
+                    <button id="generate-btn" onclick="">Generate</button>
                     <p id="wtabout"></p>
                     <div id="response-output"></div>
-                    <button id="more-btn" onclick="bot.handleMoreButtonClick()">More</button>
-                    
-                    <script src="js/obj.js?v=3"></script>
+                    <button id="more-btn" onclick="">More</button>
+
+                    <script src="js/APIHandler.js"></script>
+                    <script src="js/destinationCards.js"></script>
+                    <script src="js/UIHandler.js"></script>
                 </div>
 
                 <div class="info_container" data-aos="fade-up-left" data-aos-duration="1000">
@@ -445,7 +444,6 @@
                         
                         <div id="map"></div>
                         <div id="directions-panel">
-                            <!-- <script src="./js/trainTimes.js"></script> -->
                         </div>
 
                         <button id='view-trip' onclick="redirectToPage2()">View Trip</button>
@@ -458,7 +456,6 @@
                         </script>
 
                         <script src="js/travelPlan.js" defer></script>
-                        <script src="js/viewTrip.js"></script>
                         
                         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdzE4WLn9C1XS-_yq5far3ntFWQlldOd0&callback=initMap&libraries=places&v=weekly" defer></script>
 

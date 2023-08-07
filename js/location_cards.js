@@ -1,43 +1,42 @@
-var data = localStorage.getItem("tripSummary");
-var tripSummary = JSON.parse(data);
+const data = localStorage.getItem('tripSummary');
+const tripSummary = JSON.parse(data);
 console.log(tripSummary);
 
-let colors = ['#ff8014', '#20b37b', '#86bae0']
+const colors = ['#ff8014', '#20b37b', '#86bae0'];
 
-$(document).ready(function() {
-    let trips = tripSummary.fullTrip
-    let slideContainer = $(".w-slider-mask");
-    let slideHTML = `<div class="location-slide w-slide"><div class="div-block paris"></div></div>`;
-    let count = 0;
-    let currentDate = new Date("2023-05-20"); // Initial date
-    
-    trips.forEach(function(trip, index) {
+$(document).ready(() => {
+  const trips = tripSummary.fullTrip;
+  const slideContainer = $('.w-slider-mask');
+  const slideHTML = '<div class="location-slide w-slide"><div class="div-block paris"></div></div>';
+  let count = 0;
+  const currentDate = new Date('2023-05-20'); // Initial date
 
-        if (index === 0){
-            return;
-        }
-        // if (index === trips.length-1) {
-        //     return
-        // }
+  trips.forEach((trip, index) => {
+    if (index === 0) {
+      return;
+    }
+    // if (index === trips.length-1) {
+    //     return
+    // }
 
-        if(index === trips.length-1){
-            let lastHtml = `
+    if (index === trips.length - 1) {
+      const lastHtml = `
             <div class="train">
-                <h4>${currentDate.toLocaleDateString("en-US", { day: "numeric", month: "short" })}</h4>
+                <h4>${currentDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}</h4>
                 <img src="images/train.png" loading="lazy" sizes="(max-width: 479px) 15vw, (max-width: 767px) 8vw, 50px" srcset="images/train.png 500w, images/train.png 512w" alt="" class="image-3">
                 <button class='book' onClick='journeyButtonClicked(${index})'>Tickets</button>
             
             </div>
             `;
-    
-            slideContainer.find(".location-slide.w-slide").last().find(".div-block.paris").append(lastHtml); // append to the last slide
-        
-            return
-        }
 
-        let tripHTML = `
+      slideContainer.find('.location-slide.w-slide').last().find('.div-block.paris').append(lastHtml); // append to the last slide
+
+      return;
+    }
+
+    const tripHTML = `
         <div class="train">
-            <h4>${currentDate.toLocaleDateString("en-US", { day: "numeric", month: "short" })}</h4>
+            <h4>${currentDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}</h4>
             <img src="images/train.png" loading="lazy" sizes="(max-width: 479px) 15vw, (max-width: 767px) 8vw, 50px" srcset="images/train.png 500w, images/train.png 512w" alt="" class="image-3">
             <button class='book' onClick='journeyButtonClicked(${index})'>Tickets</button>
 
@@ -55,51 +54,43 @@ $(document).ready(function() {
             </div>
         </div>
         `;
-    
-        if (count % 3 === 0) {
-            slideContainer.append(slideHTML); // append a new slide
-        }
-        
-        slideContainer.find(".location-slide.w-slide").last().find(".div-block.paris").append(tripHTML); // append to the last slide
-    
-        
-    
-        count++;
+
+    if (count % 3 === 0) {
+      slideContainer.append(slideHTML); // append a new slide
+    }
+
+    slideContainer.find('.location-slide.w-slide').last().find('.div-block.paris').append(tripHTML); // append to the last slide
+
+    count++;
+  });
+
+  // Function to update the dates based on input values
+  window.updateDates = function () {
+    const inputs = document.querySelectorAll('.destination-card input');
+    let accumulatedDays = 0;
+
+    inputs.forEach((input, index) => {
+      const daysToAdd = parseInt(input.value);
+      accumulatedDays += daysToAdd;
+      const tripDate = new Date(currentDate.getTime());
+      tripDate.setDate(currentDate.getDate() + accumulatedDays);
+      const tripDateString = tripDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+
+      if (index < inputs.length - 1) {
+        document.querySelectorAll('.train h4')[index + 1].textContent = tripDateString;
+      }
     });
-    
 
-    // Function to update the dates based on input values
-    window.updateDates = function() {
-        let inputs = document.querySelectorAll(".destination-card input");
-        let accumulatedDays = 0;
-        
-        inputs.forEach(function(input, index) {
-            let daysToAdd = parseInt(input.value);
-            accumulatedDays += daysToAdd;
-            let tripDate = new Date(currentDate.getTime());
-            tripDate.setDate(currentDate.getDate() + accumulatedDays);
-            let tripDateString = tripDate.toLocaleDateString("en-US", { day: "numeric", month: "short" });
+    // Add the last date after all the trips
+    const lastDate = new Date(currentDate.getTime());
+    lastDate.setDate(currentDate.getDate() + accumulatedDays);
+    const lastDateString = lastDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+    document.querySelector('.train:last-child h4').textContent = lastDateString;
+  };
 
-            if(index < inputs.length-1) {
-                document.querySelectorAll('.train h4')[index+1].textContent = tripDateString;
-            }
-        });
+  window.updateDates();
 
-           // Add the last date after all the trips
-           let lastDate = new Date(currentDate.getTime());
-           lastDate.setDate(currentDate.getDate() + accumulatedDays);
-           let lastDateString = lastDate.toLocaleDateString("en-US", { day: "numeric", month: "short" });
-           document.querySelector('.train:last-child h4').textContent = lastDateString;
-    };
-
-    window.updateDates();
-
-
-    // Function to get train details and suggestions
-    
+  // Function to get train details and suggestions
 });
 
-
-$.getScript("js/webflowForView.js");
-
-
+$.getScript('js/webflowForView.js');
