@@ -1,0 +1,11 @@
+# Node.js related
+node_modules/
+npm-debug.log
+package-lock.json
+package.json
+.eslintrc.json
+
+# IDE related
+.idea/
+*.iml
+.vscode/
