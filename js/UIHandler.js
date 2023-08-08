@@ -40,11 +40,20 @@ class UIHandler {
 
   getStartMessage() {
     const countries = this.getCountries();
+    let countryStr;
+
+    if (countries.length > 0) {
+      countryStr = `Only inside these countries ${countries}`;
+    } else {
+      countryStr = 'Only places in Europe';
+    }
+
+    console.log(countryStr);
 
     const message = [
       {
         'role': 'system',
-        'content': `you are a professional travel advisor and will give a personalized trip in Europe based on the provided information. \n\nAnswer in a numbered list like this: "1. city, country - detailed motivation based on the information", maximum 40 words. give only 5 destinations at a time. Only inside these countries ${countries}`,
+        'content': `you are a professional travel advisor and will give a personalized trip in Europe based on the provided information. \n\nAnswer in a numbered list like this: "1. city, country - detailed motivation based on the information", maximum 40 words. give only 5 destinations at a time. ${countryStr}`,
       },
       {
         'role': 'user',
