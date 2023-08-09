@@ -1,41 +1,133 @@
-.full_container {
+
+.bot_container {
+    width: 100%;
+    padding: 2vw;
+    border-radius: 20px;
+    color: var(--main-bg-color1);
+    /* color: white; */
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
-    font-family: var(--destinations-font-family);
-    padding: 0 0%;
-    /* width: 200%; */
-    }
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-bg-color3);
+    /* background-color: #140a33; */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow */
+    
+}
 
-    .bot_container {
-        width: 100%;
-        padding: 2vw;
-        margin-right: 1vw;
-        color: var(--main-bg-color1);
-        display: flex;
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    column-gap:1rem
+  }
+
+@media (max-width: 768px) {
+    .search-bar {
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--main-bg-color3);
-        }
+    }
+}
+/* Reset default styles for select elements */
+#travel-style {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  width: 91.5%;
+  font-size: 16px;
+}
 
-    /*recommended*/
+/* Reset default styles for input elements */
+input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    textarea{
-        display: block;
-        margin: 0 auto;
-        padding: 0.5rem;  
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        /* max-width: 80%; */
-        width: 100%;
-        box-sizing: border-box;
-        background-color: var(--main-bg-color5);
-        resize: none;
-        height: 20vh;
+/* Custom styles for the container */
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  margin: 10px 0;
+  width: 100%;
+}
 
-        }
+#originInput {
+    width: 91.5%;
+}
+
+/* Custom styles for the label */
+.input-container label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background-color: var(--main-bg-color3);
+  padding: 0 5px;
+  font-size: 14px;
+  font-weight: bold;
+
+  margin-right: 10px; /* Add spacing between the label and input */
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Custom styles for the border around the input */
+.input-border {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  flex-grow: 1; /* Allow the input to grow and fill the remaining space */
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: flex; /* Use flexbox to position input and map icon horizontally */
+  align-items: center; /* Align items vertically in the center */
+  /* width: 32%; */
+}
+
+/* Custom styles for the input */
+.search-input {
+  font-size: 16px;
+  padding: 5px 10px; /* Add some padding on the right side to make space for the map icon */
+  background-color: transparent;
+  border: none; /* Remove the border from the input */
+  height: 30px;
+}
+
+/*recommended*/
+
+textarea{
+    display: block;
+    margin: 0 auto;
+    padding: 0.5rem;  
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /* max-width: 80%; */
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--main-bg-color5);
+    resize: none;
+    height: 20vh;
+
+    }
 
 
  
