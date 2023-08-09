@@ -5,7 +5,7 @@ html, body, h1, h2, h3, p, ul {
   }
   
   main {
-    background-color: var(--main-bg-color5);
+    background-color: var(--main-bg-color4);
     display: grid;
     align-items: center;
     /* max-width: 80vw; */
@@ -14,6 +14,12 @@ html, body, h1, h2, h3, p, ul {
     grid-gap: 4vw;  
 	/* grid-template-columns: 1fr; */
   }
+
+  @media (max-width: 768px) {
+    main {
+        padding: 0;
+    }
+}
   
   #hero {
     background-color: #febc22;

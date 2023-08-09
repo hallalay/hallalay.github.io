@@ -1,17 +1,30 @@
 /*recommended destinations*/
 #response-output {
     margin-top: 1rem;
-    padding: 1rem;
-    background-color: var(--main-bg-color3);
-    /* border: 1px solid #ccc; */
-    /* border-radius: 4px; */
-    max-width: 80%;
+    padding: 0 30px;
+    background-color: var(--main-bg-color4);
+    /* max-width: 80%; */
     width: 100%;
     margin: 0 auto;
     color: #fff;
     font-weight: bold;
     font-family: var(--destinations-font-family);
+
+    display: flex;
+    flex-wrap: wrap; /* Allows the cards to wrap onto the next line */
+    /* gap: 1rem;  */
+    column-gap: 1rem;
+    row-gap: 1.5rem;
+    /* column-count: 2; */
+    /* column-gap: 1rem; Optional: To add space between columns */
   }
+
+  @media (max-width: 768px) {
+    #response-output {
+        padding: 0 10px;
+    }
+}
+
 
 .destination-container {
     position: relative;
@@ -20,16 +33,28 @@
     align-items: center;
     justify-content: center;
     padding: 16px;
-    border: 1px solid #ccc;
     border-radius: 8px;
     cursor: pointer;
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
     transition: all 0.2s;
     height: 12rem;
+    flex: 1 1 calc(50% - 1rem); /* Assuming a gap of 1rem */
+    box-sizing: border-box; 
+
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow */
+
     }
+    
+    /* Switch to single column layout when the viewport width is 768px or less */
+    @media (max-width: 768px) {
+        .destination-container {
+            flex: 1 1 100%; /* 1 column */
+        }
+    }
+    
 
 .destination-container:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
     }
 
 .destination {
@@ -69,7 +94,7 @@
         opacity: 1;
     }
     100% {
-        transform: translate(calc(100vw - 20px), 20px) scale(0);
+        transform: translate(0, 1000px) scale(0);
         opacity: 0;
     }
     }

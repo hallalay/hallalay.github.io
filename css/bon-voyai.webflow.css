@@ -852,7 +852,7 @@ figcaption {
   justify-content: center;
   align-items: center;
   margin-top: -90px;
-  padding: 180px 30px 90px;
+  padding: 150px 30px 90px;
   display: flex;
 }
 
@@ -1131,6 +1131,14 @@ figcaption {
   padding-left: 30px;
   padding-right: 30px;
   display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .header-banner {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .about-intro {
