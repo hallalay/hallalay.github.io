@@ -6,9 +6,9 @@ html, body, h1, h2, h3, p, ul {
   
   main {
     background-color: var(--main-bg-color4);
-    display: grid;
+    /* display: grid; */
     align-items: center;
-    /* max-width: 80vw; */
+    /* max-width: var(--max-width); */
     margin: 0 auto;
     padding: 5vw;
     grid-gap: 4vw;  

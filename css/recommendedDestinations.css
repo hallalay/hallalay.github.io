@@ -1,22 +1,17 @@
 /*recommended destinations*/
 #response-output {
+    max-width: var(--max-width);
     margin-top: 1rem;
-    padding: 0 30px;
     background-color: var(--main-bg-color4);
-    /* max-width: 80%; */
     width: 100%;
     margin: 0 auto;
     color: #fff;
     font-weight: bold;
     font-family: var(--destinations-font-family);
-
     display: flex;
     flex-wrap: wrap; /* Allows the cards to wrap onto the next line */
-    /* gap: 1rem;  */
     column-gap: 1rem;
     row-gap: 1.5rem;
-    /* column-count: 2; */
-    /* column-gap: 1rem; Optional: To add space between columns */
   }
 
   @media (max-width: 768px) {

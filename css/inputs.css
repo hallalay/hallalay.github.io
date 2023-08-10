@@ -1,5 +1,6 @@
 
 .bot_container {
+    max-width: var(--max-width);
     width: 100%;
     padding: 2vw;
     border-radius: 20px;

@@ -1,11 +1,14 @@
 .info_container { 
+    max-width: var(--max-width);
     display: flex;
+    /* flex-wrap: wrap; */
     flex-direction: column;
+  margin: 0 auto;
+
     font-family: var(--destinations-font-family);
     align-items: center;
     width: 100%;
     padding: 20px;
-    /* margin-left: 1vw; */
     background-color: var(--main-bg-color1);
     color: var(--main-bg-color3);
   }
