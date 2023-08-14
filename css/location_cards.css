@@ -1662,6 +1662,34 @@
 
   
   @media screen and (max-width: 991px) {
+    .destination-card {
+      width: 100%;
+    }
+
+    .card {
+      height: 10rem;
+      width: 100%;
+    }
+
+    .train {
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    .train img {
+      /* height: 20px; */
+      width: auto;
+    }
+
+    .slider-2 {
+      height: 100%;
+    }
+
+    .div-block{
+      flex-direction: column;
+      gap: 20px;
+    }
+
     .card-heading {
       font-size: 1rem;
     }

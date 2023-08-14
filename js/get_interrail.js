@@ -1,53 +1,53 @@
-const data = localStorage.getItem('tripSummary');
-const tripSummary = JSON.parse(data);
-console.log(tripSummary);
+// const data = localStorage.getItem('tripSummary');
+// const tripSummary = JSON.parse(data);
+// console.log(tripSummary);
 
-const origin = document.createElement('p');
-origin.innerHTML = `Origin: ${tripSummary.origin}`;
-document.body.appendChild(origin);
+// const origin = document.createElement('p');
+// origin.innerHTML = `Origin: ${tripSummary.origin}`;
+// document.body.appendChild(origin);
 
-const dates = document.createElement('p');
-dates.innerHTML = `Arrival Date: ${
-  tripSummary.arrivalDate
-}<br> Departure Date: ${
-  tripSummary.departureDate}`;
-document.body.appendChild(dates);
+// const dates = document.createElement('p');
+// dates.innerHTML = `Arrival Date: ${
+//   tripSummary.arrivalDate
+// }<br> Departure Date: ${
+//   tripSummary.departureDate}`;
+// document.body.appendChild(dates);
 
-const { fullTrip } = tripSummary;
+// const { fullTrip } = tripSummary;
 
-// Create button for origin to first destination
+// // Create button for origin to first destination
 
-const originToFirst = document.createElement('button');
-originToFirst.innerHTML = `${tripSummary.origin} to ${fullTrip[0].city} date: ${new Date(tripSummary.arrivalDate)}`;
-originToFirst.addEventListener('click', () => {
-  journeyButtonClicked(tripSummary.origin, fullTrip[0].city, tripSummary.arrivalDate);
+// const originToFirst = document.createElement('button');
+// originToFirst.innerHTML = `${tripSummary.origin} to ${fullTrip[0].city} date: ${new Date(tripSummary.arrivalDate)}`;
+// originToFirst.addEventListener('click', () => {
+//   journeyButtonClicked(tripSummary.origin, fullTrip[0].city, tripSummary.arrivalDate);
 
-  // alert("Button clicked for journey: " + tripSummary.origin + " to " + fullTrip[0].city);
-  // Add your desired functionality for the button click event
-});
-document.body.appendChild(originToFirst);
+//   // alert("Button clicked for journey: " + tripSummary.origin + " to " + fullTrip[0].city);
+//   // Add your desired functionality for the button click event
+// });
+// document.body.appendChild(originToFirst);
 
-for (let i = 0; i < fullTrip.length - 1; i++) {
-  const journey1 = fullTrip[i];
-  const journey2 = fullTrip[i + 1];
+// for (let i = 0; i < fullTrip.length - 1; i++) {
+//   const journey1 = fullTrip[i];
+//   const journey2 = fullTrip[i + 1];
 
-  (function (journey1, journey2) { // Create a new scope using a closure
-    const journeyButton = document.createElement('button');
-    journeyButton.innerHTML = `${journey1.city} to ${journey2.city} date: ${new Date(journey1.departureDate)}`;
-    journeyButton.addEventListener('click', async () => {
-      await journeyButtonClicked(journey1.city, journey2.city, journey2.arrivalDate);
-    });
-    document.body.appendChild(journeyButton);
-  }(journey1, journey2)); // Pass journey1 and journey2 as arguments to the closure function
-}
+//   (function (journey1, journey2) { // Create a new scope using a closure
+//     const journeyButton = document.createElement('button');
+//     journeyButton.innerHTML = `${journey1.city} to ${journey2.city} date: ${new Date(journey1.departureDate)}`;
+//     journeyButton.addEventListener('click', async () => {
+//       await journeyButtonClicked(journey1.city, journey2.city, journey2.arrivalDate);
+//     });
+//     document.body.appendChild(journeyButton);
+//   }(journey1, journey2)); // Pass journey1 and journey2 as arguments to the closure function
+// }
 
-// Create button for last destination back to origin
-const lastToOrigin = document.createElement('button');
-lastToOrigin.innerHTML = `${fullTrip[fullTrip.length - 1].city} to ${tripSummary.origin} date: ${new Date(tripSummary.departureDate)}`;
-lastToOrigin.addEventListener('click', () => {
-  journeyButtonClicked(fullTrip[fullTrip.length - 1].city, tripSummary.origin, tripSummary.departureDate);
-});
-document.body.appendChild(lastToOrigin);
+// // Create button for last destination back to origin
+// const lastToOrigin = document.createElement('button');
+// lastToOrigin.innerHTML = `${fullTrip[fullTrip.length - 1].city} to ${tripSummary.origin} date: ${new Date(tripSummary.departureDate)}`;
+// lastToOrigin.addEventListener('click', () => {
+//   journeyButtonClicked(fullTrip[fullTrip.length - 1].city, tripSummary.origin, tripSummary.departureDate);
+// });
+// document.body.appendChild(lastToOrigin);
 
 function findUIC(cityName) {
   const formattedCityName = cityName.toLowerCase().replace(/\s/g, '').replace(/[^\w\s]/g, '');
@@ -58,13 +58,14 @@ function findUIC(cityName) {
     .then((csvData) => {
       const rows = csvData.split('\n').slice(1);
 
-      for (const row of rows) {
+      const foundRow = rows.find((row) => {
         const columns = row.split(';');
         const rowCityName = columns[0].toLowerCase().replace(/\s/g, '').replace(/[^\w\s]/g, '');
+        return rowCityName.includes(formattedCityName);
+      });
 
-        if (rowCityName.includes(formattedCityName)) {
-          return parseFloat(columns[3]);
-        }
+      if (foundRow) {
+        return parseFloat(foundRow.split(';')[3]);
       }
 
       return null;
@@ -98,11 +99,11 @@ async function journeyButtonClicked(index) {
     const fromUIC = await findUIC(from);
     const toUIC = await findUIC(to);
 
-    console.log(fromUIC);
+    // console.log(fromUIC);
 
     const url = generateTimetableURL(from, fromUIC, to, toUIC, date);
 
-    console.log(url);
+    // console.log(url);
 
     window.open(url);
     // return interrailUrl
