@@ -104,14 +104,14 @@ class UIHandler {
     try {
       this.messages = this.getStartMessage();
 
-      // const data = await this.apiHandler.callGpt(this.messages);
-      // const text = data.choices[0].message.content;
+      const data = await this.apiHandler.callGpt(this.messages);
+      const text = data.choices[0].message.content;
 
-      // this.messages.push(data.choices[0].message);
+      this.messages.push(data.choices[0].message);
 
-      // console.log('answer: ', text);
+      console.log('answer: ', text);
 
-      const text = '1. Barcelona, Spain - Barcelona is an amazing city with a unique culture and fascinating architecture. It is also home to many beautiful beaches and a vibrant nightlife.\n\n2. London, UK - London is a global city with world-class attractions, beautiful parks and gardens, and a lively cultural scene.\n\n3. Paris, France - Rio de Janeiro is a vibrant city with stunning beaches and an exciting culture. It is also home to the iconic Christ the Redeemer statue.\n\n4. Prague, Czech - New York City is a bustling and exciting city with plenty to see and do. It is also home to some of the world\'s most iconic landmarks.\n\n5. Berlin, Germany - Bangkok is a bustling and vibrant city with an amazing array of culture, cuisine, and attractions. It is also home to some of the most stunning temples in the world.';
+      // const text = '1. Barcelona, Spain - Barcelona is an amazing city with a unique culture and fascinating architecture. It is also home to many beautiful beaches and a vibrant nightlife.\n\n2. London, UK - London is a global city with world-class attractions, beautiful parks and gardens, and a lively cultural scene.\n\n3. Paris, France - Rio de Janeiro is a vibrant city with stunning beaches and an exciting culture. It is also home to the iconic Christ the Redeemer statue.\n\n4. Prague, Czech - New York City is a bustling and exciting city with plenty to see and do. It is also home to some of the world\'s most iconic landmarks.\n\n5. Berlin, Germany - Bangkok is a bustling and vibrant city with an amazing array of culture, cuisine, and attractions. It is also home to some of the most stunning temples in the world.';
 
       recommendedDests = this.extractDestinations(text);
 

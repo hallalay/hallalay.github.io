@@ -1609,27 +1609,6 @@
     overflow: visible;
   }
   
-  .card-front.paris {
-    background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/Ljubljana-Slovenia.webp');
-    background-position: 0 0, 50%;
-    background-size: auto, cover;
-    background-attachment: scroll, scroll;
-  }
-  
-  .card-front.barcelona {
-    background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/florian-wehde-uFGi0_YciE0-unsplash.jpg');
-    background-position: 0 0, 50%;
-    background-size: auto, cover;
-    background-attachment: scroll, scroll;
-  }
-  
-  .card-front.prauge {
-    background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../images/GettyImages-1045586638.webp');
-    background-position: 0 0, 50%;
-    background-size: auto, cover;
-    background-attachment: scroll, scroll;
-  }
-  
   .card-back {
     height: 100%;
     -webkit-backface-visibility: hidden;
@@ -1677,10 +1656,16 @@
   .card-heading {
     color: #fff;
     font-family: Libre Franklin, sans-serif;
-    font-size: 3em;
+    font-size: 3rem;
   }
+
+
   
   @media screen and (max-width: 991px) {
+    .card-heading {
+      font-size: 1rem;
+    }
+
     .navigation {
       z-index: 999;
       padding-right: 10px;
