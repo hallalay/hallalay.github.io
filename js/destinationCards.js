@@ -41,8 +41,66 @@ class DestinationCardHandler {
       const motivationElement = this.createMotivationElement(motivation);
       container.appendChild(motivationElement);
 
+      const infoButton = this.createInformationButton(destination);
+      container.appendChild(infoButton);
+
       this.responseOutput.appendChild(container);
     });
+  }
+
+  openModalWithSummary(summary) {
+    const modal = document.getElementById('infoModal');
+    const citySummaryElement = document.getElementById('citySummary');
+    const closeModalButton = document.querySelector('.close-button');
+
+    // Add event listener to close the modal
+    closeModalButton.onclick = () => {
+      modal.style.display = 'none';
+    };
+
+    // Add event listener to close the modal when clicking outside of it
+    window.onclick = (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+
+    citySummaryElement.textContent = summary;
+    modal.style.display = 'block';
+  }
+
+  async fetchCitySummary(destination) {
+    try {
+      const cityName = destination.split(',')[0].trim();
+      const endpoint = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&origin=*&titles=${cityName}`;
+      const response = await fetch(endpoint);
+      const jsonData = await response.json();
+
+      console.log(response);
+
+      // Extract the summary from the JSON response
+      const { pages } = jsonData.query;
+      const pageId = Object.keys(pages)[0];
+      return pages[pageId].extract;
+    } catch (error) {
+      console.error('Error fetching city summary:', error);
+      return null;
+    }
+  }
+
+  async informationClick(destination, event) {
+    event.stopPropagation();
+    const summary = await this.fetchCitySummary(destination); // Notice the "this." here
+    this.openModalWithSummary(summary); // Open modal with the summary
+    // You can then populate this summary in a modal or display it as needed
+  }
+
+  createInformationButton(destination) {
+    const infoButton = document.createElement('button');
+    infoButton.textContent = 'i';
+    infoButton.classList.add('info-button');
+    infoButton.addEventListener('click', (event) => this.informationClick(destination, event));
+    return infoButton;
   }
 
   createDestinationContainer() {

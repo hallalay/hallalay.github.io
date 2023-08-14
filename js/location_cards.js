@@ -1,11 +1,11 @@
-const data = localStorage.getItem('tripSummary');
-const tripSummary = JSON.parse(data);
-console.log(tripSummary);
+const tripSummaryData = localStorage.getItem('tripSummary');
+const Summary = JSON.parse(tripSummaryData);
+console.log(Summary);
 
 const colors = ['#ff8014', '#20b37b', '#86bae0'];
 
 $(document).ready(() => {
-  const trips = tripSummary.fullTrip;
+  const trips = Summary.fullTrip;
   const slideContainer = $('.w-slider-mask');
   const slideHTML = '<div class="location-slide w-slide"><div class="div-block paris"></div></div>';
   let count = 0;

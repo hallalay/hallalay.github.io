@@ -82,17 +82,19 @@
             <a href="#" class="h3 cc-header">Plan Your Trip</a>
             <div class="cta-line cc-header"></div>
           </div>
-          <h1 class="h1" data-aos="flip-up" data-aos-duration="1000">
+          <h1 class="h1 travel-plan-title" data-aos="flip-up" data-aos-duration="1000">
             Design Your Dream Journey
           </h1>
-          <p class="paragraph" data-aos="flip-up" data-aos-duration="1000">
+          <!--<p class="paragraph" data-aos="flip-up" data-aos-duration="1000">
             Looking for an unforgettable adventure? Look no further! Share with
             us your dream trip and we'll tailor a once-in-a-lifetime experience
             that you'll never forget. Let our AI curate the perfect itinerary
             for you, filled with exclusive activities and hidden gems that will
             leave you breathless. Don't settle for an ordinary vacation, let us
             make your travel dreams a reality!
-          </p>
+          </p> -->
+
+          <p class="paragraph" data-aos="flip-up" data-aos-duration="1000">Dream of a unique trip? Share your vision, and we'll craft an adventure with exclusive gems just for you.</p>
         </div>
       </div>
     </div>
@@ -187,14 +189,14 @@
         <button id="openModalBtn">Select Regions of Europe</button>
 
         <!-- <button id='moreOptions' class="moreOptions" onclick="toggleMoreOptions()">MORE</span></button> -->
-        <div id="moreOptions-container" style="display: none"></div>
+        <div id="moreOptions-container" ></div> <!--add style="display: none"-->
         <script src="js/moreOptions.js"></script>
 
         <p>
           Tell me, as detailed as you can, what you want to see and do on your
           trip. You can click on the examples below for some inspiration
         </p>
-        <textarea id="prompt-input" placeholder="Additional information?">whatever</textarea>
+        <textarea id="prompt-input" placeholder="Additional information?"></textarea>
         <button id="generate-btn" class="button" onclick="">Generate</button>
 
         <script src="js/APIHandler.js" defer></script>
@@ -209,8 +211,17 @@
       <div id="response-output"></div>
       <button id="more-btn" onclick="">More</button>
 
+      <div id="infoModal" class="modal">
+        <div class="modal-content">
+          <span class="close-button">&times;</span>
+          <p id="citySummary"></p>
+        </div>
+      </div>
+
       <div id="mapModal" class="modal">
         <div class="modal-content">
+          <span id="closeModalBtn" class="close-button">&times;</span>
+
           <div id="svgContainer">
             <svg
               id="svgpoint"
@@ -1201,7 +1212,6 @@
               </g>
             </svg>
           </div>
-          <button id="closeModalBtn">Close</button>
         </div>
       </div>
       <script src="js/EuropeRegionSelection.js"></script>
