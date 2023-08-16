@@ -41,9 +41,9 @@ function generateTimetableURL(origin, originCode, destination, destinationCode, 
 
 async function journeyButtonClicked(index) {
   try {
-    const from = fullTrip[index - 1].city;
-    const to = fullTrip[index].city;
-    const date = new Date(tripSummary.departureDate);
+    const from = globalSummary.fullTrip[index - 1].city;
+    const to = globalSummary.fullTrip[index].city;
+    const date = new Date(globalSummary.departureDate);
 
     const fromUIC = await findUIC(from);
     const toUIC = await findUIC(to);

@@ -1,4 +1,7 @@
 const colors = ['#ff8014', '#20b37b', '#86bae0'];
+
+const globalTripSummaryData = localStorage.getItem('tripSummary');
+const globalSummary = JSON.parse(globalTripSummaryData);
 // Function to get train details and suggestions
 const moreDestinations = function (index) {
   currentlySelectedIndex = index; // Store the index for later use when adding to trip
@@ -25,7 +28,7 @@ const addToTrip = function () {
   location.reload();
 };
 
-function renderSlider(trips) {
+function renderSlider(trips, departure) {
   const slideContainer = $('.w-slider-mask');
 
   const slideHTML = '<div class="location-slide w-slide"><div class="div-block paris"></div></div>';
@@ -121,7 +124,7 @@ $(document).ready(() => {
 
   const trips = Summary.fullTrip;
 
-  renderSlider(trips);
+  renderSlider(trips, Summary.departureDate);
   updateDates();
   $.getScript('js/webflowForView.js');
 });
