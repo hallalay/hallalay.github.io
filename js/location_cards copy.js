@@ -1,3 +1,9 @@
+const tripSummaryData = localStorage.getItem('tripSummary');
+const Summary = JSON.parse(tripSummaryData);
+console.log(Summary);
+
+const slideContainer = $('.w-slider-mask');
+
 const colors = ['#ff8014', '#20b37b', '#86bae0'];
 // Function to get train details and suggestions
 const moreDestinations = function (index) {
@@ -6,29 +12,33 @@ const moreDestinations = function (index) {
 };
 
 const addToTrip = function () {
-  const tripSummaryData = localStorage.getItem('tripSummary');
-  const Summary = JSON.parse(tripSummaryData);
   const trips = Summary.fullTrip;
 
   const newDestination = {
     city: 'Paris',
     country: 'France',
-    imageUrl: 'path_to_paris_image.jpg',
+    imageUrl: 'path_to_paris_image.jpg', // Update this path
   };
 
+  // Insert the new destination into the trips array
   trips.splice(currentlySelectedIndex, 0, newDestination);
 
-  // Update local storage
-  localStorage.setItem('tripSummary', JSON.stringify({ fullTrip: trips }));
+  console.log(trips);
 
-  // Reload the page
-  location.reload();
+  // Close the modal
+  document.getElementById('destinationModal').style.display = 'none';
+
+  renderSlider(trips);
+  updateDates();
+  $.getScript('js/webflowForView.js');
+
+  // Refresh the slide content (you might need to clear the previous slides and render them again using the modified trips array)
+  // ... your logic to update the slider ...
 };
 
 function renderSlider(trips) {
-  const slideContainer = $('.w-slider-mask');
-
   const slideHTML = '<div class="location-slide w-slide"><div class="div-block paris"></div></div>';
+  let count = 0;
   const currentDate = new Date('2023-05-20'); // Initial date
 
   slideContainer.empty();
@@ -85,7 +95,11 @@ function renderSlider(trips) {
       slideContainer.append(slideHTML);
     }
 
+    console.log(tripHTML);
+
     slideContainer.find('.location-slide.w-slide').last().find('.div-block.paris').append(tripHTML); // append to the last slide
+
+    count++;
   });
 }
 
@@ -116,9 +130,6 @@ const updateDates = function () {
 };
 
 $(document).ready(() => {
-  const tripSummaryData = localStorage.getItem('tripSummary');
-  const Summary = JSON.parse(tripSummaryData);
-
   const trips = Summary.fullTrip;
 
   renderSlider(trips);

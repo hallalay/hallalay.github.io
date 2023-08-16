@@ -1,7 +1,7 @@
 class DestinationCardHandler {
-  constructor(uiHandlerInstance) {
+  constructor(apiHandlerInstance) {
     this.responseOutput = document.getElementById('response-output');
-    this.uiHandler = uiHandlerInstance;
+    this.apiHandler = apiHandlerInstance;
   }
 
   moveDestination(container, destination, motivation) {
@@ -41,7 +41,7 @@ class DestinationCardHandler {
       const motivationElement = this.createMotivationElement(motivation);
       container.appendChild(motivationElement);
 
-      const infoButton = this.createInformationButton(destination);
+      const infoButton = await this.createInformationButton(destination);
       container.appendChild(infoButton);
 
       this.responseOutput.appendChild(container);
@@ -69,7 +69,7 @@ class DestinationCardHandler {
     modal.style.display = 'block';
   }
 
-  async fetchCitySummary(destination) {
+  async fetchCitySummaryWiki(destination) {
     try {
       const cityName = destination.split(',')[0].trim();
       const endpoint = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&origin=*&titles=${cityName}`;
@@ -88,18 +88,44 @@ class DestinationCardHandler {
     }
   }
 
-  async informationClick(destination, event) {
+  async fetchCitySummaryGpt(destination) {
+    const cityName = destination.split(',')[0].trim();
+
+    const message = [
+      {
+        'role': 'system',
+        'content': 'you are a professional travel advisor',
+      },
+      {
+        'role': 'user',
+        'content': `Give me a summary of things to do in ${cityName}`,
+      },
+    ];
+
+    // message = {};
+    const data = await this.apiHandler.callGpt(message);
+
+    console.log(data);
+
+    const text = data.choices[0].message.content;
+
+    return text;
+  }
+
+  async informationClick(destination, summary, event) {
     event.stopPropagation();
-    const summary = await this.fetchCitySummary(destination); // Notice the "this." here
     this.openModalWithSummary(summary); // Open modal with the summary
     // You can then populate this summary in a modal or display it as needed
   }
 
-  createInformationButton(destination) {
+  async createInformationButton(destination) {
     const infoButton = document.createElement('button');
     infoButton.textContent = 'i';
     infoButton.classList.add('info-button');
-    infoButton.addEventListener('click', (event) => this.informationClick(destination, event));
+    // const summary = await this.fetchCitySummaryGpt(destination); // Notice the "this." here
+    const summary = await this.fetchCitySummaryWiki(destination); // Notice the "this." here
+    // console.log(summary);
+    infoButton.addEventListener('click', (event) => this.informationClick(destination, summary, event));
     return infoButton;
   }
 
