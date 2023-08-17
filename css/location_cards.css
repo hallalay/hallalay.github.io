@@ -1681,6 +1681,27 @@
     width: 300px; 
 }
 
+.add_dests {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-yellow-color);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    color: white;  /* Adjust color as needed */
+
+}
+
+.add_dests:hover {
+  scale: 1.2;
+}
+
+
+
 @media screen and (max-width: 991px) {
     .destination-card {
       width: 100%;

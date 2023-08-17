@@ -8,15 +8,22 @@ const moreDestinations = function (index) {
   document.getElementById('destinationModal').style.display = 'block';
 };
 
-const addToTrip = function () {
+const addToTrip = async function () {
   const tripSummaryData = localStorage.getItem('tripSummary');
   const Summary = JSON.parse(tripSummaryData);
   const trips = Summary.fullTrip;
 
+  const city = 'Paris';
+  const country = 'France';
+
+  const imageUrl = await APIHandler.getImageUrl(city);
+
+  console.log(imageUrl);
+
   const newDestination = {
-    city: 'Paris',
-    country: 'France',
-    imageUrl: 'path_to_paris_image.jpg',
+    city,
+    country,
+    imageUrl,
   };
 
   trips.splice(currentlySelectedIndex, 0, newDestination);
@@ -63,15 +70,16 @@ function renderSlider(trips, departure) {
 
     const tripHTML = `
         <div class="train">
-            <button class='more' onClick='moreDestinations(${index})'>More Destinations</button>
+            <button class='add_dests' onClick='moreDestinations(${index})'>+</button>
             <h4>${currentDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}</h4>
             <img src="images/train.png" loading="lazy" sizes="(max-width: 479px) 15vw, (max-width: 767px) 8vw, 50px" srcset="images/train.png 500w, images/train.png 512w" alt="" class="image-3">
             <button class='book' onClick='journeyButtonClicked(${index})'>Tickets</button>
 
         </div>
-        <div data-w-id="0f35f371-1ea1-c9a2-b522-b1c8daa51732" class="destination-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="${index * 100}">
-            <input type="number" onchange="updateDates()" min="1" value="1">
-            <div class="card">
+        <div data-w-id="0f35f371-1ea1-c9a2-b522-b1c8daa51732" class="destination-card" data-aos="fade-upssss" data-aos-duration="1000" data-aos-delay="${index * 100}">
+        <input type="number" onchange="updateDates()" min="1" value="1">
+            
+        <div class="card">
                 <div class="card-front" style="background-image: url('${trip.imageUrl}'); background-size: cover; background-position: center;">
                     <h2 class="card-heading">${trip.city}, ${trip.country}</h2>
                 </div>
@@ -81,6 +89,7 @@ function renderSlider(trips, departure) {
                 </div>
             </div>
         </div>
+
         `;
 
     // If the last slide has 3 cities, append a new slide
