@@ -48,18 +48,18 @@ class UIHandler {
       countryStr = 'Only places in Europe';
     }
 
-    console.log(countryStr);
-
     const message = [
       {
         'role': 'system',
-        'content': `you are a professional travel advisor and will give a personalized trip in Europe based on the provided information. \n\nAnswer in a numbered list like this: "1. city, country - detailed motivation based on the information", maximum 40 words. give only 5 destinations at a time. ${countryStr}`,
+        'content': 'you are a professional travel advisor and will give a personalized trip in Europe based on the provided information. \n\nAnswer in a numbered list like this: "1. city, country - detailed motivation based on the information", maximum 40 words. give only 5 destinations at a time.',
       },
       {
         'role': 'user',
-        'content': `Preferences:\n${document.querySelector('select[name="travel-style"]').value.trim()}\n My travel expectations:\n${document.getElementById('prompt-input').value.trim()}`,
+        'content': `User's Travel Style: ${document.querySelector('select[name="travel-style"]').value.trim()}\n\nSpecial Interests: Beach, culture, hiking, adventure, nature\n\nTravel Expectations: ${document.getElementById('prompt-input').value.trim()}\n\nBased on the above information, please suggest the best cities for the user to visit and a brief explanation as to why each city is a good fit.\n\n !!!!Important: ${countryStr}!!!`,
+        // 'content': `Preferences:\n${document.querySelector('select[name="travel-style"]').value.trim()}\n My travel expectations:\n${document.getElementById('prompt-input').value.trim()}`,
       },
     ];
+    console.log(message);
     return message;
   }
 

@@ -1,4 +1,4 @@
-class Map {
+class MapPath {
   constructor(options) {
     const {
       directionsService, directionsRenderer, mapElement, searchBoxElement,
@@ -139,7 +139,7 @@ function initMap() {
     searchBoxElement: document.getElementById('originInput'),
   };
 
-  const map = new Map(mapOptions);
+  const map = new MapPath(mapOptions);
 
   const origin = document.getElementById('originInput').value;
   const start = origin || 'Brussels';
