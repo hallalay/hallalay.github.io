@@ -23,7 +23,11 @@ class UIHandler {
 
   getCountries() {
     const countryIdList = [];
-    const regions = document.querySelectorAll('.region-group.active');
+    let regions = document.querySelectorAll('.region-group.active');
+
+    if (!regions.length) {
+      regions = document.querySelectorAll('.region-group');
+    }
 
     regions.forEach((region) => {
       const countries = region.querySelectorAll('path');
@@ -43,9 +47,9 @@ class UIHandler {
     let countryStr;
 
     if (countries.length > 0) {
-      countryStr = `Only cities in these countries ${countries}`;
+      countryStr = `Suggest ONLY cities located in these countries ${countries}, No exceptions`;
     } else {
-      countryStr = 'Only places in Europe';
+      countryStr = 'Suggest ONLY cities located in Europe. No exceptions';
     }
 
     const specialInterests = Array.from(document.querySelectorAll('.option-buttons.active')).map((element) => element.textContent.trim());
@@ -53,11 +57,11 @@ class UIHandler {
     const message = [
       {
         'role': 'system',
-        'content': 'You\'re a seasoned travel advisor, tasked with suggesting bespoke European destinations based on user insights. \n\nStructure your suggestions like this:\n1. City, Country - Concise rationale (Max 40 words).\n\nLimit your recommendations to 5 destinations.',
+        'content': 'You are a travel advisor specializing exclusively in European destinations. Recommend bespoke European cities based on user insights.\n\nStructure:\n1. City, Country - Concise motivation (Max 40 words).\n\nLimit: 5 destinations.',
       },
       {
         'role': 'user',
-        'content': `User's Travel Style: ${document.querySelector('select[name="travel-style"]').value.trim()}\n\nSpecial Interests: ${specialInterests}\n\nTravel Expectations: ${document.getElementById('prompt-input').value.trim()}\n\nGiven the above, recommend European cities that align with my preferences, detailing briefly why each is apt.\n\nNote: ${countryStr}!`,
+        'content': `User's Travel Style: ${document.querySelector('select[name="travel-style"]').value.trim()}\n\nSpecial Interests: ${specialInterests}\n\nTravel Expectations: ${document.getElementById('prompt-input').value.trim()}\n\nGiven the above, recommend European cities that align with my preferences, detailing briefly why each is apt.\n\nNote Important: ${countryStr}!`,
       },
     ];
     console.log(message[1].content);

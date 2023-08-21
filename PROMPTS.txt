@@ -20,3 +20,14 @@ const message = [
         'content': `User's Travel Style: ${document.querySelector('select[name="travel-style"]').value.trim()}\n\nSpecial Interests: ${specialInterests}\n\nTravel Expectations: ${document.getElementById('prompt-input').value.trim()}\n\nGiven the above, recommend European cities that align with my preferences, detailing briefly why each is apt.\n\nNote: ${countryStr}!`,
       },
     ];
+
+const message = [
+      {
+        'role': 'system',
+        'content': 'You are a travel advisor specializing exclusively in European destinations. Recommend bespoke European cities based on user insights.\n\nStructure:\n1. City, Country - Rationale (Max 40 words).\n\nLimit: 5 destinations.'
+      },      
+      {
+        'role': 'user',
+        'content': `User's Travel Style: ${document.querySelector('select[name="travel-style"]').value.trim()}\n\nSpecial Interests: ${specialInterests}\n\nTravel Expectations: ${document.getElementById('prompt-input').value.trim()}\n\nGiven the above, recommend European cities that align with my preferences, detailing briefly why each is apt.\n\nNote Important: ${countryStr}!`,
+      },
+    ];

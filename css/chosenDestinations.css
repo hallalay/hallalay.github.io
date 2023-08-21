@@ -1,45 +1,111 @@
-.info_container { 
+.info-container { 
     max-width: var(--max-width);
-    display: flex;
-    /* flex-wrap: wrap; */
-    flex-direction: column;
     margin: 0 auto;
-
     font-family: var(--destinations-font-family);
-    align-items: center;
     width: 100%;
     padding: 20px;
+    border-radius: 10px;
     background-color: var(--main-bg-color1);
     color: var(--main-bg-color3);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow */
   }
 
-.chosen-destination-container {
-    position: relative;
+  .content-wrapper {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    justify-content: center;
+    gap: 20px;  /* Space between left and right column */
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+      flex-direction: column;
+  }
+}
+  .left-column{
+    padding: 20px;
+    flex: 1.5;  /* Takes up 2 parts of the available space */
+    display: flex;
+    flex-direction: column;  /* Stacking child elements vertically */
   }
 
-.chosen-destination-container input {
-    margin-right: 10px;
-    width: 50px;
-  }
+#view-trip {
+  align-self: center;  /* Center the button horizontally in right_column */
+  margin-top: auto;  /* Pushes the button to the bottom if there's available space */
+}
 
-.chosen-destination-container .delete-button {
-    position: absolute;
-    right: 10px
-    /* width: 50px; */
-  }
-
-.destination {
-    font-weight: bold;
+.right-column {
+  flex: 2;
+  display: flex;
+  flex-direction: column;  /* Ensures stacked layout */
+  gap: 20px;  /* Gives space between elements */
+  align-items: center;  
 }
 
 #map {
   width: 100%;
-  height: 400px;
+  padding-top: 100%;
   margin-bottom: 20px;
-  /*curve corners*/
   border-radius: 10px;
 }
 
+#directions-panel {
+  width: 100%;
+  font: var(--destinations-font-family);
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.route-card {
+  font: var(--destinations-font-family);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background-color: var(--main-bg-color4);
+  color: var(--main-bg-color1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.route-card:hover {
+  background-color: var(--main-yellow-color);
+}
+.distance {
+  text-align: center;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.distance-text {
+  color: var(--main-bg-color4);
+}
+
+.distance h3 {
+  margin: 0;
+}
+
+.route-card button {
+  color: var(--main-bg-color4);
+  width: 12%;
+  background-color: var(--main-bg-color2);
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.route-card button:hover {
+  transform: translateY(-1px);
+  transition: transform 0.1s ease-in-out;
+}
+
+.route-card button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}

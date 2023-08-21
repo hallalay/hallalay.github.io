@@ -63,7 +63,7 @@
         margin: 1rem auto 1rem;
         padding: 0.3rem 0.5rem;
         font-size: 0.8rem;
-        background-image: linear-gradient(90deg, var(--main-bg-color3), var(--main-bg-color4));
+        background-color: var(--main-bg-color4);
         color: var(--main-bg-color1);
         border: none;
         border-radius: 20px;
@@ -73,8 +73,8 @@
 
     #view-trip:hover {
         transform: translateY(-2px);
-        background-image: linear-gradient(90deg, var(--main-bg-color3), var(--main-bg-color4));
         transition: transform 0.1s ease-in-out;
+        background-color: var(--main-yellow-color);
     }
 
     #view-trip:active {
