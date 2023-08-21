@@ -2,7 +2,6 @@ const colors = ['#ff8014', '#20b37b', '#86bae0'];
 
 const globalTripSummaryData = localStorage.getItem('tripSummary');
 const globalSummary = JSON.parse(globalTripSummaryData);
-console.log(globalSummary);
 // Function to get train details and suggestions
 const moreDestinations = function (index) {
   currentlySelectedIndex = index; // Store the index for later use when adding to trip
@@ -14,12 +13,12 @@ const addToTrip = async function () {
   const Summary = JSON.parse(tripSummaryData);
   const trips = Summary.fullTrip;
 
+  // send a request to openapi and get the city, country and motivation
+
   const city = 'Paris';
   const country = 'France';
 
-  const imageUrl = await APIHandler.getImageUrl(city);
-
-  console.log(imageUrl);
+  const { imageUrl, blockquote } = await APIHandler.getImageUrl(city);
 
   const newDestination = {
     city,
@@ -45,9 +44,6 @@ function renderSlider(trips, departure) {
   slideContainer.empty();
 
   slideContainer.append(slideHTML);
-
-  console.log(trips);
-  console.log(slideContainer);
 
   trips.forEach((trip, index) => {
     if (index === 0) {

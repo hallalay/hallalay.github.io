@@ -34,6 +34,31 @@ class APIHandler {
     const response = await fetch(apiUrl);
     const data = await response.json();
     const imageUrl = data.results[0].urls.regular;
-    return imageUrl;
+    const photographerName = data.results[0].user.name;
+    const linkHtml = data.results[0].links.html;
+
+    // Creating the blockquote element
+    const blockquote = document.createElement('blockquote');
+    blockquote.className = 'photo-quote';
+
+    const pElement = document.createElement('p');
+    pElement.className = 'quote-paragraph';
+
+    const anchorPhotographer = document.createElement('a');
+    anchorPhotographer.href = linkHtml;
+    anchorPhotographer.innerText = `${photographerName}`;
+
+    const anchorUnsplash = document.createElement('a');
+    anchorUnsplash.href = 'https://unsplash.com/';
+    anchorUnsplash.innerText = 'Unsplash';
+
+    // Appending elements together
+    pElement.append('Photo by ', anchorPhotographer, ' on ', anchorUnsplash);
+    blockquote.appendChild(pElement);
+
+    return {
+      imageUrl,
+      blockquote,
+    };
   }
 }

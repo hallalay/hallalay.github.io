@@ -1702,7 +1702,7 @@
 
 
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 990px) {
     .destination-card {
       width: 100%;
     }
@@ -1727,8 +1727,9 @@
     }
 
     .div-block{
+      padding: 20px;
       flex-direction: column;
-      gap: 20px;
+      gap: 10px;
     }
 
     .card-heading {

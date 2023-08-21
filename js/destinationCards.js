@@ -29,7 +29,7 @@ class DestinationCardHandler {
       const container = this.createDestinationContainer(destination, motivation);
       container.addEventListener('click', () => this.moveDestination(container, destination, motivation));
 
-      const imageUrl = await APIHandler.getImageUrl(destination.split(', ')[0]);
+      const { imageUrl, blockquote } = await APIHandler.getImageUrl(destination.split(', ')[0]);
       this.setBackgroundImage(container, imageUrl);
 
       const overlay = this.createOverlay();
@@ -43,6 +43,8 @@ class DestinationCardHandler {
 
       const infoButton = await this.createInformationButton(destination);
       container.appendChild(infoButton);
+
+      container.append(blockquote);
 
       this.responseOutput.appendChild(container);
     });
@@ -76,8 +78,6 @@ class DestinationCardHandler {
       const response = await fetch(endpoint);
       const jsonData = await response.json();
 
-      console.log(response);
-
       // Extract the summary from the JSON response
       const { pages } = jsonData.query;
       const pageId = Object.keys(pages)[0];
@@ -105,8 +105,6 @@ class DestinationCardHandler {
     // message = {};
     const data = await this.apiHandler.callGpt(message);
 
-    console.log(data);
-
     const text = data.choices[0].message.content;
 
     return text;
@@ -124,7 +122,6 @@ class DestinationCardHandler {
     infoButton.classList.add('info-button');
     // const summary = await this.fetchCitySummaryGpt(destination); // Notice the "this." here
     const summary = await this.fetchCitySummaryWiki(destination); // Notice the "this." here
-    // console.log(summary);
     infoButton.addEventListener('click', (event) => this.informationClick(destination, summary, event));
     return infoButton;
   }

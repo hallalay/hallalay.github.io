@@ -29,7 +29,6 @@ class MapPath {
       initMap();
       const places = searchBox.getPlaces();
       if (places.length === 0) return;
-      console.log(places[0]);
     });
   }
 
@@ -43,8 +42,6 @@ class MapPath {
     if (i !== 0) {
       cityCard.addEventListener('click', () => {
         const originCity = route.legs[i].start_address.split(', ')[0];
-        console.log(originCity);
-        console.log(`Selected Route Segment: ${i + 1}`);
       });
     }
 
@@ -71,7 +68,6 @@ class MapPath {
         // console.log('summary roue', route.legs)
 
         const places = route.legs.map((place) => place.end_address);
-        console.log(places);
 
         this.destinations(places);
 
@@ -111,11 +107,14 @@ class MapPath {
 
     // this.fullTrip = [];
     for (let i = 0; i < waypoints.length; i++) {
-      console.log(waypoints[i]);
+      const [city, country] = waypoints[i].split(', ');
+
+      const { imageUrl, blockquote } = await APIHandler.getImageUrl(city);
+
       const destination = {
-        city: waypoints[i].split(', ')[0],
-        country: waypoints[i].split(', ')[1],
-        imageUrl: await APIHandler.getImageUrl(waypoints[i].split(', ')[0]),
+        city,
+        country,
+        imageUrl,
       };
 
       this.fullTrip.push(destination);
@@ -128,8 +127,6 @@ class MapPath {
       // departureDate: document.getElementById("departureDateInput").value,
     };
     localStorage.setItem('tripSummary', JSON.stringify(tripSummary));
-
-    console.log(this.fullTrip);
   }
 }
 

@@ -64,7 +64,6 @@ class UIHandler {
         'content': `User's Travel Style: ${document.querySelector('select[name="travel-style"]').value.trim()}\n\nSpecial Interests: ${specialInterests}\n\nTravel Expectations: ${document.getElementById('prompt-input').value.trim()}\n\nGiven the above, recommend European cities that align with my preferences, detailing briefly why each is apt.\n\nNote Important: ${countryStr}!`,
       },
     ];
-    console.log(message[1].content);
     return message;
   }
 
@@ -75,8 +74,6 @@ class UIHandler {
     // Use matchAll to get all matches
     // Use the spread operator (...) to convert the iterator returned by matchAll() into an array for easier processing.
     const matches = [...text.matchAll(regex)];
-
-    console.log(matches);
 
     recommendedDests = matches.map((match) => {
       const [, city, country, motivation] = match;
@@ -97,6 +94,21 @@ class UIHandler {
   handleGenerateButtonClick = async () => {
     this.USERINPUT = this.promptInput.value.trim();
 
+    if (!document.getElementById('originInput').value) {
+      alert('Please enter origin');
+      return;
+    }
+
+    if (!document.getElementById('arrivalDateInput').value) {
+      alert('Please enter departing date');
+      return;
+    }
+
+    if (!document.getElementById('travel-style').value.trim()) {
+      alert('Please choose a travel style');
+      return;
+    }
+
     if (!this.USERINPUT) {
       alert('Please enter a prompt.');
       return;
@@ -108,15 +120,14 @@ class UIHandler {
     try {
       this.messages = this.getStartMessage();
 
+      console.log(this.messages);
+
       const data = await this.apiHandler.callGpt(this.messages);
       const text = data.choices[0].message.content;
 
       this.messages.push(data.choices[0].message);
 
-      console.log('answer: ', text);
-
       // const text = '1. Barcelona, Spain - Barcelona is an amazing city with a unique culture and fascinating architecture. It is also home to many beautiful beaches and a vibrant nightlife.\n\n2. London, UK - London is a global city with world-class attractions, beautiful parks and gardens, and a lively cultural scene.\n\n3. Paris, France - Rio de Janeiro is a vibrant city with stunning beaches and an exciting culture. It is also home to the iconic Christ the Redeemer statue.\n\n4. Prague, Czech - New York City is a bustling and exciting city with plenty to see and do. It is also home to some of the world\'s most iconic landmarks.\n\n5. Berlin, Germany - Bangkok is a bustling and vibrant city with an amazing array of culture, cuisine, and attractions. It is also home to some of the most stunning temples in the world.';
-
       recommendedDests = this.extractDestinations(text);
 
       this.NOT += `${this.recommendedCitys},`;
@@ -148,8 +159,6 @@ class UIHandler {
       const text = data.choices[0].message.content;
 
       this.messages.push(data.choices[0].message);
-
-      console.log(this.messages);
 
       // const text = '1. Tokyo, Japan - Visit the vibrant city life, explore the world-famous cuisine, and enjoy the unique culture and festivals.\n2. Seoul, South Korea - Experience the cutting-edge technology, explore the ancient palaces, and marvel at the modern architecture.';
 

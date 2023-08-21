@@ -146,8 +146,8 @@
                 type="text"
                 id="originInput"
                 placeholder="Origin"
-                value="stockholm"
-              />
+              /> 
+              <!-- value="stockholm" -->
               <svg
                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium mui-style-vubbuv"
                 viewBox="0 0 24 24"
@@ -169,8 +169,8 @@
                 type="date"
                 id="arrivalDateInput"
                 placeholder="Arrival Date"
-                value="2023-07-17"
-              />
+              /> 
+                <!-- value="2023-07-17" -->
             </div>
           </div>
           <div class="input-container">
@@ -181,14 +181,17 @@
                 class="search-input"
                 id="travel-style"
               >
-                <option value="Adventure">
+              <option value="" disabled selected hidden>Select your travel style...</option>
+
+                <option value="Adventure and outdoor activities">
                   Adventure and outdoor activities
                 </option>
-                <option value="Relaxation">Relaxation and spa retreats</option>
-                <option value="Cultural">
+                <option value="Relaxation and spa retreats">Relaxation and spa retreats</option>
+                <option value="Cultural and historical exploration">
                   Cultural and historical exploration
                 </option>
-                <option value="Food">Food and culinary experiences</option>
+                <option value="Food and culinary experiences">Food and culinary experiences</option>
+                <option value="None">Other</option>
               </select>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -228,10 +231,14 @@
           Select Regions of Europe
         </button>
 
-        <!-- <button id='moreOptions' class="moreOptions" onclick="toggleMoreOptions()">Special Interests</span></button> -->
+
         <div id="moreOptions-container"></div>
-        <!--add style="display: none"-->
         <script src="js/moreOptions.js"></script>
+
+        <button id='moreOptions' class="moreOptions" onclick="toggleMoreOptions()">Special Interests</span></button>
+        <script defer>
+          toggleMoreOptions()
+        </script>
 
         <p>
           Tell me, as detailed as you can, what you want to see and do on your
