@@ -2,6 +2,7 @@ const colors = ['#ff8014', '#20b37b', '#86bae0'];
 
 const globalTripSummaryData = localStorage.getItem('tripSummary');
 const globalSummary = JSON.parse(globalTripSummaryData);
+console.log(globalSummary);
 // Function to get train details and suggestions
 const moreDestinations = function (index) {
   currentlySelectedIndex = index; // Store the index for later use when adding to trip
@@ -39,7 +40,7 @@ function renderSlider(trips, departure) {
   const slideContainer = $('.w-slider-mask');
 
   const slideHTML = '<div class="location-slide w-slide"><div class="div-block paris"></div></div>';
-  const currentDate = new Date('2023-05-20'); // Initial date
+  const currentDate = new Date(departure); // Initial date
 
   slideContainer.empty();
 
@@ -76,7 +77,7 @@ function renderSlider(trips, departure) {
             <button class='book' onClick='journeyButtonClicked(${index})'>Tickets</button>
 
         </div>
-        <div data-w-id="0f35f371-1ea1-c9a2-b522-b1c8daa51732" class="destination-card" data-aos="fade-upssss" data-aos-duration="1000" data-aos-delay="${index * 100}">
+        <div data-w-id="0f35f371-1ea1-c9a2-b522-b1c8daa51732" class="destination-card"">
         <input type="number" onchange="updateDates()" min="1" value="1">
             
         <div class="card">
@@ -103,7 +104,7 @@ function renderSlider(trips, departure) {
 
 // Function to update the dates based on input values
 const updateDates = function () {
-  const currentDate = new Date('2023-05-20'); // Initial date
+  const currentDate = new Date(globalSummary.arrivalDate); // Initial date
 
   const inputs = document.querySelectorAll('.destination-card input');
   let accumulatedDays = 0;
@@ -133,7 +134,7 @@ $(document).ready(() => {
 
   const trips = Summary.fullTrip;
 
-  renderSlider(trips, Summary.departureDate);
+  renderSlider(trips, Summary.arrivalDate);
   updateDates();
   $.getScript('js/webflowForView.js');
 });
