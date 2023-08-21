@@ -1,0 +1,22 @@
+first: const message = [
+      {
+        'role': 'system',
+        'content': 'you are a professional travel advisor and will give a personalized trip in Europe based on the provided information. \n\nAnswer in a numbered list like this: "1. city, country - detailed motivation based on the information", maximum 40 words. give only 5 destinations at a time.',
+      },
+      {
+        'role': 'user',
+        'content': `User's Travel Style: ${document.querySelector('select[name="travel-style"]').value.trim()}\n\nSpecial Interests: ${specialInterests}\n\nTravel Expectations: ${document.getElementById('prompt-input').value.trim()}\n\nBased on the above information, please suggest the best cities for the user to visit and a brief explanation as to why each city is a good fit.\n\n !!!!Important: ${countryStr}!!!`,
+      },
+    ];
+
+second:
+const message = [
+      {
+        'role': 'system',
+        'content': 'You\'re a seasoned travel advisor, tasked with suggesting bespoke European destinations based on user insights. \n\nStructure your suggestions like this:\n1. City, Country - Concise rationale (Max 40 words).\n\nLimit your recommendations to 5 destinations.',
+      },
+      {
+        'role': 'user',
+        'content': `User's Travel Style: ${document.querySelector('select[name="travel-style"]').value.trim()}\n\nSpecial Interests: ${specialInterests}\n\nTravel Expectations: ${document.getElementById('prompt-input').value.trim()}\n\nGiven the above, recommend European cities that align with my preferences, detailing briefly why each is apt.\n\nNote: ${countryStr}!`,
+      },
+    ];

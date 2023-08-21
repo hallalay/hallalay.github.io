@@ -43,23 +43,24 @@ class UIHandler {
     let countryStr;
 
     if (countries.length > 0) {
-      countryStr = `Only inside these countries ${countries}`;
+      countryStr = `Only cities in these countries ${countries}`;
     } else {
       countryStr = 'Only places in Europe';
     }
 
+    const specialInterests = Array.from(document.querySelectorAll('.option-buttons.active')).map((element) => element.textContent.trim());
+
     const message = [
       {
         'role': 'system',
-        'content': 'you are a professional travel advisor and will give a personalized trip in Europe based on the provided information. \n\nAnswer in a numbered list like this: "1. city, country - detailed motivation based on the information", maximum 40 words. give only 5 destinations at a time.',
+        'content': 'You\'re a seasoned travel advisor, tasked with suggesting bespoke European destinations based on user insights. \n\nStructure your suggestions like this:\n1. City, Country - Concise rationale (Max 40 words).\n\nLimit your recommendations to 5 destinations.',
       },
       {
         'role': 'user',
-        'content': `User's Travel Style: ${document.querySelector('select[name="travel-style"]').value.trim()}\n\nSpecial Interests: Beach, culture, hiking, adventure, nature\n\nTravel Expectations: ${document.getElementById('prompt-input').value.trim()}\n\nBased on the above information, please suggest the best cities for the user to visit and a brief explanation as to why each city is a good fit.\n\n !!!!Important: ${countryStr}!!!`,
-        // 'content': `Preferences:\n${document.querySelector('select[name="travel-style"]').value.trim()}\n My travel expectations:\n${document.getElementById('prompt-input').value.trim()}`,
+        'content': `User's Travel Style: ${document.querySelector('select[name="travel-style"]').value.trim()}\n\nSpecial Interests: ${specialInterests}\n\nTravel Expectations: ${document.getElementById('prompt-input').value.trim()}\n\nGiven the above, recommend European cities that align with my preferences, detailing briefly why each is apt.\n\nNote: ${countryStr}!`,
       },
     ];
-    console.log(message);
+    console.log(message[1].content);
     return message;
   }
 
@@ -98,8 +99,7 @@ class UIHandler {
     }
 
     document.getElementById('more-btn').style.display = 'block';
-    this.wtabout.textContent = 'What about theese destinations?';
-    this.responseOutput.textContent = 'Loading...';
+    this.responseOutput.innerHTML = '<div class="loader"></div>';
 
     try {
       this.messages = this.getStartMessage();
@@ -122,6 +122,8 @@ class UIHandler {
       console.error(error);
       alert('An error occurred. Please try again later.');
     }
+
+    this.wtabout.textContent = 'What about theese destinations?';
   };
 
   handleMoreButtonClick = async () => {
@@ -129,6 +131,8 @@ class UIHandler {
     recommendedDests = recommendedDests.filter((dest) => !chosenDests.some((destination) => dest.destination === destination));
 
     const bDests = [...recommendedDests];
+
+    this.responseOutput.insertAdjacentHTML('afterend', '<div class="loader"></div>');
 
     try {
       this.messages.push({
@@ -161,6 +165,11 @@ class UIHandler {
     } catch (error) {
       console.error(error);
       alert('An error occurred. Please try again later.');
+    }
+
+    const loader = document.querySelector('.loader');
+    if (loader) {
+      loader.remove();
     }
   };
 }
