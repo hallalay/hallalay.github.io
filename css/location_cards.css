@@ -1902,7 +1902,7 @@
     }
   
     .nav-menu {
-      background-color: #5ab963;
+      background-color: var(--main-bg-color2);
       padding-top: 30px;
       padding-bottom: 30px;
       box-shadow: 0 5px 20px rgba(0, 0, 0, .2);
@@ -1920,7 +1920,7 @@
     }
   
     .menu-button:active, .menu-button.w--open {
-      background-color: #5ab963;
+      background-color: var(--main-bg-color2);
     }
   
     .header-copy {
