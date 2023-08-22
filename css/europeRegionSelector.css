@@ -1,6 +1,10 @@
 #openModalBtn {
   padding: 10px;
   border: 1px;
+  border-radius: 5px;
+  margin: 10px;
+  background-color: var(--main-yellow-color);
+  color: white;
 }
 
 #WATER {
@@ -40,9 +44,12 @@
   .modal-content {
     overflow: hidden;
     position: relative;
-    margin: 15% auto;
     width: 80%;
+    width: 100%;
     max-width: 800px;
+    padding: 0;
+    background: rgba(0, 0, 0, 0);
+    border: 0;
   }
   
   /* Close button for the modal (you can add it inside the .modal-content if needed) */
