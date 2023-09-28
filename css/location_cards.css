@@ -99,7 +99,7 @@
     display: table;
   }
   
-  .w-checkbox-input {
+  /* .w-checkbox-input {
     float: left;
     margin: 4px 0 0 -20px;
     line-height: normal;
@@ -123,7 +123,7 @@
   
   .w-checkbox-input--inputType-custom.w--redirected-focus {
     box-shadow: 0 0 3px 1px #3898ec;
-  }
+  } */
   
   .w-users-usersignupverificationmessage {
     display: none;

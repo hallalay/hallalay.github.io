@@ -44,7 +44,7 @@
 }
 
 /* Reset default styles for input elements */
-input {
+.search-bar input {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;

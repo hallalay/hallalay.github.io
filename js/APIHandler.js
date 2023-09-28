@@ -1,6 +1,6 @@
 class APIHandler {
   constructor() {
-    this.HEROKU_URL = 'https://bonvoyai-176378383e73.herokuapp.com/openai';
+    this.HEROKU_URL = 'https://bonvoyai-176378383e73.herokuapp.com/api/openai';
   }
 
   async callGpt(message) {
