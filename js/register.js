@@ -2,19 +2,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const BASE_URL = 'https://bonvoyai-176378383e73.herokuapp.com';
   //   const BASE_URL = 'http://localhost:3000';
 
-  const loginForm = document.getElementById('login-form');
+  const registerForm = document.getElementById('register-form');
   const messageDiv = document.getElementById('message');
 
-  loginForm.addEventListener('submit', async (e) => {
+  registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const username = document.getElementById('log-in-email').value;
-    const password = document.getElementById('log-in-password').value;
+    const email = document.getElementById('sign-up-email').value;
+    const name = document.getElementById('sign-up-name').value;
+    const password = document.getElementById('sign-up-password').value;
+    const acceptPrivacy = document.getElementById('sign-up-accept-privacy').checked;
+    const acceptCommunication = document.getElementById('sign-up-accept-communications').checked;
 
-    const response = await sendRequest(`${BASE_URL}/auth/login`, { username, password });
+    const requestData = {
+      email,
+      name,
+      password,
+      acceptPrivacy,
+      acceptCommunication,
+    };
 
+    const response = await sendRequest(`${BASE_URL}/auth/register`, requestData);
+
+    // Check if the response has an "error" property and use it; otherwise, use "message"
     const feedbackMessage = response.error ? response.error : response.message;
-
     displayMessage(feedbackMessage);
   });
 
