@@ -1,0 +1,103 @@
+<div id="loginModal" class="login-modal">
+    <div class="login-modal-content">
+        <span class="login-close-btn">&times;</span>
+
+        <!-- Existing login section -->
+        <div class="login-left-section">
+            <h2 class="login-left-header">Login to Your Account</h2>
+            <p class="login-left-sub-header">Login using social networks</p>
+
+            <!-- Social Network Logos -->
+            <div class="social-login-buttons">
+                <img src="images/facebook_logo.png" alt="Facebook Logo" class="social-logo facebook-logo">
+                <img src="images/google-logo.png" alt="Google Logo" class="social-logo google-logo">
+                <img src="images/linked-in_logo.png" alt="LinkedIn Logo" class="social-logo linkedin-logo">
+            </div>
+
+            <!-- OR Line -->
+            <div class="or-divider">
+                <span class="or-text">or</span>
+            </div>
+
+            <!-- Email & Password -->
+            <form id="login-form" class="login-register-form">
+                <div>
+                    <input type="email" id="log-in-email" name="username" placeholder="Email" required>
+                </div>
+                <div class="password-container">
+                    <input type="password" id="log-in-password" name="password" placeholder="Password" required>
+                    <i toggle="#log-in-password" class="fa-solid fa-eye toggle-password"></i>
+
+                </div>
+                <button type="submit">Sign In</button>
+            </form>
+            <div id="server-login-message"></div>
+        </div>
+
+        <!-- New registration section -->
+        <div class="login-right-section">
+            <h2 class="login-right-header">New Here?</h2>
+            <p>Create an account and explore what we offer. Join our community now!</p>
+            <button id="go-to-register" class="login-right-button">Sign Up</button>
+        </div>
+    </div>     
+</div>
+
+<div id="registerModal" class="login-modal">
+    <div class="login-modal-content">
+        <span class="login-close-btn">&times;</span>
+
+        <!-- Existing login section -->
+        <div class="login-left-section">
+            <h2 class="login-left-header">Create an Account</h2>
+            <p class="login-left-sub-header">Register using social networks</p>
+
+            <!-- Social Network Logos -->
+            <div class="social-login-buttons">
+                <img src="images/facebook_logo.png" alt="Facebook Logo" class="social-logo facebook-logo">
+                <img src="images/google-logo.png" alt="Google Logo" class="social-logo google-logo">
+                <img src="images/linked-in_logo.png" alt="LinkedIn Logo" class="social-logo linkedin-logo">
+            </div>
+
+            <!-- OR Line -->
+            <div class="or-divider">
+                <span class="or-text">or</span>
+            </div>
+
+            <!-- Email & Password -->
+            <form id="register-form" class="login-register-form">
+                <div>
+                    <input type="text" id="register-name" name="name" placeholder="Name" required>
+                </div>
+                <div>
+                    <input type="email" id="register-email" name="email" placeholder="Email" required>
+                </div>
+                <div class="password-container">
+                    <input type="password" id="register-password" name="password" placeholder="Password" required>
+                   <i toggle="#register-password" class="fa-solid fa-eye toggle-password"></i>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="accept-terms" name="acceptTerms" required>
+                    <label for="accept-terms">By creating an account, I agree to Bon VoyAi's <a href="">privacy policy</a> and <a href="">terms of service</a></label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="accept-communication" name="acceptCommunication">
+                    <label for="accept-communication">I consent to receive marketing emails.</label>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+            
+            <div id="server-register-message"></div>
+        </div>
+
+        <!-- New registration section -->
+        <div class="login-right-section">
+            <h2 class="login-right-header">Already have an account?</h2>
+            <p>Sign in and continue enjoying the features and benefits you love.</p>
+            <button id="go-to-login" class="login-right-button">Sign in</button>
+        </div>
+    </div> 
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" href="css/login-modal.css">

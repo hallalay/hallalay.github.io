@@ -1,0 +1,163 @@
+.login-left-header{
+    margin: 10px 0;
+    text-align: center;
+}
+
+.login-left-sub-header{
+    margin: 10px 0;
+    text-align: center;
+}
+
+.or-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.or-text {
+    background-color: #fff; /* Assuming a white background for the modal */
+    padding: 0 10px;
+    z-index: 1;
+}
+
+.or-divider::before,
+.or-divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ccc; /* Gray divider line */
+}
+
+.social-login-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between logos */
+    margin-bottom: 20px;
+}
+
+.social-logo {
+    width: 30px; /* Adjust as needed */
+    cursor: pointer; /* Makes logos look clickable */
+}
+
+.login-modal{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+.login-modal-content {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* padding: 20px; */
+    width: 800px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.login-register-form {
+    text-align: center; /* To center the button and other inline elements */
+}
+
+.login-register-form input[type="text"],
+.login-register-form input[type="email"],
+.login-register-form input[type="password"] {
+    display: block;
+    margin: 10px auto;  /* Centers horizontally and adds vertical spacing */
+    padding: 8px;      /* Adds some space inside the input */
+    border-radius: 15px; /* Rounds the corners */
+    border: 0;  /* Gives a slight border, adjust as necessary */
+    background-color: #f7c7443f; /* A light background color */
+    width: 100%;       /* You can adjust this as per your preference */
+    max-width: 300px; /* Prevents the input from becoming too wide */
+}
+.login-register-form button {
+    padding: 8px;
+    border-radius: 15px;
+    width: 50%;
+    background-color: var(--main-yellow-color);
+}
+
+.login-close-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.login-left-section, .login-right-section {
+    flex: 1;
+    padding: 40px;
+    border-radius: 4px; /* Consistent with your modal content styling */
+}
+
+.login-right-section {
+    color: #fff;
+    background-color: var(--main-yellow-color);
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 20px; /* Space between the login and register sections */
+    border-left: 1px solid #ccc; /* A divider between the sections */
+    padding-left: 30px; /* Extra padding to account for the divider */
+}
+
+.login-right-header {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.login-right-button {
+    display: block;
+    margin: 20px auto; /* Centers the button horizontally */
+    padding: 8px;
+    border-radius: 15px; /* Consistent with your other buttons */
+    background-color: white;
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+    width: 50%; /* Consistent with your login button width */
+    cursor: pointer;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;  /* Vertically center the checkbox with the label */
+    margin-bottom: 10px; /* Optional: Adds some space between multiple checkbox containers */
+    text-align: start;
+}
+
+.checkbox-container label {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 10px;  /* Adds some space between the checkbox and its label */
+}
+
+/* --------------------- PASSWORD ------------------------*/
+
+.password-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
