@@ -76,8 +76,8 @@ function attachModalListeners() {
 document.addEventListener('DOMContentLoaded', loadLoginModal);
 
 function loginSendToServer() {
-  // const BASE_URL = 'https://bonvoyai-176378383e73.herokuapp.com';
-  const BASE_URL = 'http://localhost:3000';
+  const BASE_URL = 'https://bonvoyai-176378383e73.herokuapp.com';
+  //   const BASE_URL = 'http://localhost:3000';
 
   const loginForm = document.getElementById('login-form');
   const messageDiv = document.getElementById('server-login-message');
@@ -122,8 +122,8 @@ function loginSendToServer() {
 }
 
 function registerSendToServer() {
-  // const BASE_URL = 'https://bonvoyai-176378383e73.herokuapp.com';
-  const BASE_URL = 'http://localhost:3000';
+  const BASE_URL = 'https://bonvoyai-176378383e73.herokuapp.com';
+  //   const BASE_URL = 'http://localhost:3000';
 
   const registerForm = document.getElementById('register-form');
   const messageDiv = document.getElementById('server-register-message');
